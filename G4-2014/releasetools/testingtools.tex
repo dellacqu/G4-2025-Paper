@@ -1,0 +1,31 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% testingtools.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Testing tools}
+Within the release process, integration of new or modified code into reference
+tags is performed.  This requires regular nightly testing of new or modified 
+code against the code base on a number of different platforms.  A platform is a 
+specific combination of hardware and operating system version, a specific 
+version of compiler, and a set of \Gfour{}-specific build options.  This regular
+testing was migrated from a custom setup to using the CMake tool suite 
+\cite{release:cdash}.  
+
+There is a continuous testing cycle and nightly test runs.  Testing on a
+specific platform is performed using the CTest tool of the CMake tool suite. 
+For each platform, the source code corresponding to the set of tags to be tested
+is checked out using SVN, CMake is run to configure and compile the code, and 
+CTest runs the tests.  More than 80 unit test codes are applied, each testing a 
+specific part of \Gfour{}.  In addition most examples and several benchmarks are
+exercised during testing, bringing the total number of tests run to more than 
+200. The exact number varies with platform, as optional software required by 
+some tests may not be available on every platform.  CMake takes this into 
+account by checking the availability of optional software during configuration, 
+and skipping tests where software is missing.  Finally, a summary of test 
+results is uploaded to the CDash web site.
+  
+In addition to nightly testing, continuous testing is performed on a small 
+number of platforms using a restricted set of tests.  This regularly checks for 
+changes in the status of tags, including also tags proposed for testing, and 
+starts a test run when needed.  This restricted testing allows for an early,
+but limited check of new software giving fast feedback to developers.

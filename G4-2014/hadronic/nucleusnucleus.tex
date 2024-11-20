@@ -1,0 +1,54 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% nucleusnucleus.tex
+% Authors: Davide Mancusi, Dennis Wright
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Nucleus-nucleus models}
+As of release 10.0 there were six \Gfour{} models capable of handling
+nucleus-nucleus collisions: binary light ion, abrasion/ablation, 
+electromagnetic dissociation, QMD, INCL++ and FTF models.
+
+The Binary Light Ion model handles collisions in which either the projectile or
+the target has mass $A < 13$.  Based on the \Gfour{} Binary Cascade model 
+\cite{hadbib:binary}, it is valid above 80 MeV and below 10 GeV/nucleon. 
+
+Operating over a similar energy range, but without limits on the projectile or
+target masses, the \gclass{G4WilsonAbrasion} model, based on NUCFRG2 
+\cite{hadbib:wilson} is faster, but less detailed, than the Binary Light Ion 
+model.  It is a geometrical model in which a portion of the target nucleus along
+the incident path of the projectile is gouged out, forming a forward-going 
+compound nucleus and a residual target.  The associated Wilson ablation model is
+used to de-excite the products of the initial collision.
+
+Also based on NUCFRG2, \gclass{G4EMDissociation} is an electromagnetic 
+dissociation model provided to handle the production of nuclear fragments 
+resulting from the exchange of virtual photons between projectile and target 
+nuclei.  This model is valid for nuclei of all masses and all energies.
+  
+QMD (Quantum Molecular Dynamics) is a native \Gfour{} model based on an extension
+of the classical molecular dynamics model introduced in release 9.1.  Each 
+nucleon in the target and projectile nuclei is treated as a gaussian wave packet
+which propagates with scattering through the nuclear medium, taking Pauli 
+exclusion into account.  The nuclear potential is that of two merging nuclei and
+its shape is re-calculated at each time step of the collision.  
+Participant-participant scattering is also taken into account.  
+These last two facts combine to make the model rather slow for collisions of
+heavy nuclei, but the production of nuclear fragments versus energy is well 
+reproduced.  The model is valid for all projectile-target combinations and for
+projectile energies between 100 MeV/nucleon and 10 GeV/nucleon.  Since its
+introduction, the model was made Lorentz covariant and improvements were made in
+fragment prodcution at relativistic energies.
+ 
+The \inclxx\ model, covered above, can also accommodate nucleus-nucleus 
+reactions provided the projectile has a mass below $A = 19$ and an energy 
+between 1 MeV/nucleon and 3 GeV/nucleon.  A broad validation campaign on 
+heterogeneous observables has shown that, in spite of the conceptual 
+difficulties, the extended \inclxx\ model yields predictions in fair agreement 
+with experimental data; it is however crucial to make a suitable choice for the 
+coupling with the statistical de-excitation model.
+
+The FTF model, covered above, is capable of modeling 
+reactions with all combinations of projectile and target mass, with projectile 
+energies in the range 2 GeV/nucleon to about 1 TeV/nucleon.  However, validation
+of this application is still in progress, and collisions of two heavy nuclei are 
+expected to be computationally expensive.
+

@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% antibaryonXS.tex
+% Authors: Aida Galoyan, Vladimir Uzhinsky
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%{\bf Anti-baryon Cross Sections} \linebreak[4]
+% \noindent {\emph{Antinucleus--nucleus cross sections}}
+\paragraph{Antinucleus--nucleus cross sections}
+Production of anti-nuclei, especially anti-$^4{\rm He}$, has been observed in
+nucleus-nucleus and proton-proton collisions by the RHIC and LHC experiments. 
+Contemporary and future experimental studies of anti-nucleus production require
+a knowledge of anti-nucleus interaction cross sections with matter which are 
+needed to estimate various experimental corrections, especially those due to 
+particle losses which reduce the detected rate.  Because only a few measurements
+of these cross sections exist, they were calculated using the Glauber approach 
+\cite{hadbib:AntiA1,hadbib:AntiA2,hadbib:AntiA3} and the Monte Carlo averaging 
+method proposed in \cite{hadbib:AntiA4,hadbib:AntiA5}.
+
+Two main considerations are used in the calculations: a parameterization of the
+amplitude of antinucleon-nucleon elastic scattering in the impact parameter
+representation and a parameterization of one-particle nuclear densities for
+various nuclei. The Gaussian form from \cite{hadbib:AntiA1,hadbib:AntiA3} was
+used for the amplitude and for the nuclear density the Woods-Saxon distribution
+for intermediate and heavy nuclei and the Gaussian form for light nuclei was 
+used, with parameters from the paper \cite{hadbib:AntiA6}. Details of the 
+calculations are presented in \cite{hadbib:AntiA7}.
+
+Resulting calculations agree rather well with experimental data on anti-proton
+interactions with light and heavy target nuclei ($\chi^2/NoF$ = 258/112) which 
+corresponds to an accuracy of $\sim $8\% \cite{hadbib:AntiA7}.  Nearly all
+available experimental data were analyzed to get this result.  The predicted 
+antideuteron-nucleus cross sections are in agreement with the corresponding 
+experimental data \cite{hadbib:AntiA8}.
+
+Direct application of the Glauber approach in software packages like \Gfour{}
+is ineffective due to the large number of numerical integrations required. To 
+overcome this limitation, a parameterization of calculations 
+\cite{hadbib:ggepjc,hadbib:ggnimb} was used, with expressions for the total 
+and inelastic cross sections as proposed above in the discussion of the 
+Glauber-Gribov extension. Fitting the calculated Glauber cross sections
+yields the effective nuclear radii presented in the expressions for $\bar pA$,
+$\bar dA$, $\bar tA$ and $\bar \alpha A$ interactions:
+\\
+$$
+R^{eff}_A=a\ A^b\ + \ c/A^{1/3}.
+$$
+The quantities $a$, $b$ and $c$ are given in \cite{hadbib:AntiA7}.
+
+As a result of these studies, the \Gfour{} toolkit can now simulate 
+anti-nucleus interactions with matter for projectiles with momenta between 
+100~MeV/c and 1~TeV/c per anti-nucleon.
+

@@ -1,0 +1,115 @@
+
+\subsection{\textbf{Hadronic physics}}\label{sec:hadphys}
+\Gfour{} hadronic physics is loosely defined to cover any reaction which can
+produce hadrons in its final state.  As such, it covers purely hadronic
+interactions, lepton- and gamma-induced nuclear reactions, and radioactive
+decay.  The interaction is represented as a \Gfour{} process which consists of
+a cross section to determine when the interaction will occur, and a model which
+determines the final state of the interaction.    
+
+Models and cross sections are provided which span an energy range from sub-eV to
+~TeV.  Following the toolkit philosophy, more than one model or process is 
+usually offered in any given energy range in order to provide alternative 
+approaches for different applications. 
+
+During the last several years, new models and cross sections have been added
+to the toolkit, while others have been improved and some obsolete models have
+been removed.
+
+% shortcut commands for some model names
+\newcommand{\incl}{INCL}
+\newcommand{\inclxx}{INCL++}
+\newcommand{\abla}{ABLA~V3}
+
+%------------------------ Uzhi part ----------------------------------
+% A simulation of a particle propagation in a matter requires the following steps:
+% a choice of an interaction point and a target nucleus which depend on cross sections
+% of the particle interactions with components of the matter, a sampling of a reaction
+% of the particle with chosen target nucleus and a simulation of the reaction.
+%---------------- Uzhi changes -----------------------------------
+
+\subsubsection{Hadronic cross sections}\label{sec:crosssections}
+Total, inelastic and elastic cross sections for hadron-nucleus, nucleus-nucleus
+and antinucleus-nucleus reactions are provided which cover energies up to ~TeV 
+in some cases.  Proton-, neutron- and pion-nucleus cross sections at low to 
+medium energies have been available in \Gfour{} since its beginning and their 
+details are covered elsewhere \cite{bib:generalpaper2}.  The focus here is on 
+recent developments in cross sections for other projectile types and at higher
+energies. \\
+
+% done
+\input{hadronic/barashenkov.tex}
+
+% done
+\input{hadronic/glaubergribov.tex}
+
+% done 
+\input{hadronic/chipsextract.tex}
+
+% done
+\input{hadronic/antibaryonXS.tex}
+
+% done
+\input{hadronic/nucleusnucleusXS.tex}
+
+\subsubsection{Hadronic models and processes}\label{sec:models}
+Due to the large energy range covered, it is not possible for a single model to
+describe all the physics encountered in a simulation.  A typical sequence of 
+reactions may begin with a high energy hadron-nucleon collision within a nucleus
+(QCD or parton string model), followed by the propagation of the secondaries of 
+the collision through the nuclear medium (intra-nuclear cascade model), followed
+by the de-excitation of the remnant nucleus (precompound model) and its 
+evaporation of particles (evaporation and breakup models) until it reaches the 
+ground state.  Each of these stages is qualitatively different from the other 
+and will be discussed in turn, highlighting recent developments. 
+
+Other reactions covered include nucleus-nucleus interactions (QMD or 
+parton-based models), elastic models  (including coherent hadron scattering 
+from nuclei), capture, and lepton- and gamma-nuclear interactions.
+
+% Some of them are considered in
+% Sec.~\ref{sec:models}. At low energy ($<$ 10 MeV) a negative charged or neutral
+% particle can be absorbed by a target nucleus. A simulation of the reactions
+% is presented in subsection~\ref{had:stopping}. At higher energies but below
+% meson production threshold there can be only elastic hadron-nucleon scattering
+% and potential interactions.
+% Thus we have implemented in \Gfour three of
+% such models -- BIN, QMD and \inclxx. The binary model (BIN) was described in
+% \Gfour paper~\cite{G4}. Below a short description of the QMD model and
+% the Li\`{e}ge Intranuclear Cascade model (\inclxx) will be presented
+% \cite{hadbib:inclxx}.
+
+\input{hadronic/string.tex}  \label{had:string}
+\input{hadronic/cascade.tex} \label{had:cascade}
+\input{hadronic/precompound.tex} 
+\input{hadronic/deexcitation.tex} \label{had:deexcitation}
+
+\input{hadronic/elastic.tex}
+
+\input{hadronic/stopping.tex} \label{had:stopping}
+
+% needs names of kinematic models 
+\input{hadronic/neutrons.tex}
+
+% \input{hadronic/cascade.tex} \label{had:cascade}
+
+% \input{hadronic/string.tex}  \label{had:string}
+
+
+%\subsubsection{Nuclear de-excitation model}
+% \label{sec:evaporation}
+
+% \input{hadronic/precompound.tex}
+
+% \input{hadronic/deexcitation.tex} \label{had:deexcitation}
+
+% needs discussion of G4NuclNuclDiffuseElastic
+\input{hadronic/nucleusnucleus.tex}
+
+\input{hadronic/radioactivedecay.tex}
+
+\input{hadronic/gamleptnuclear.tex} \label{had:gamleptnucleus}
+
+\input{hadronic/obsoletemodels.tex}
+
+

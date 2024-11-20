@@ -1,0 +1,78 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% phys.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Many years of experience with Geant4 across a large number of applications 
+%has demonstrated the significant advantage of a modular physics lists approach, 
+%where each type of physics is instantiated by a \emph{physics constructor} 
+%class. Geant4 maintains several EM constructors (Table~\ref{em:physl}) which 
+%are created for different application domains. These constructor classes are 
+%components of full Geant4 reference physics lists 
+%(for example, $FTFP\_BERT$, $FTFP\_BIC\_EMY$...), and are available for EM 
+%production physics constructors (names are defined in Table~\ref{em:physl}). 
+%At the same time, all EM constructors may be directly used by custom 
+%physics lists.
+
+%The physics of a \Gfour\ simulation is built in a modular approach, in which a
+%list (called a physics list) of interaction types is created. 
+
+Electromagnetic physics is defined in physics constructor classes, which are
+components of full physics classes. \Gfour{} maintains several EM constructors
+(Table~\ref{em:physl}) for different application domains. The constructors are 
+used by both \Gfour{} reference physics lists and custom physics lists.
+
+For HEP experiments, high efficiency CPU performance is required, and, as 
+such, the HEP physics configuration should provide a compromise between 
+accuracy and CPU speed. For simulation of shielding in space and for radiation 
+dose in medical studies, more detailed tracking of low energy particles is 
+required. For this purpose, in physics constructors oriented towards medicine 
+and space science applications 
+(i.e. \gclass{G4EmStandardPhysics\_option4}, named $EMZ$), more strong step 
+limitation are defined and models with more detailed treatment of atomic 
+effects and detailed ion stopping powers are applied. A general goal is to 
+provide a physics constructor with set of the most accurate models for each 
+energy range and particle type.
+
+To assist in the production and testing of physics constructors, 
+experimental constructors are available. 
+\Gfour{}-DNA physics constructors are applicable only 
+for a limited set of materials (mainly liquid water). Examples 
+of how to build physics lists with \Gfour{}-DNA physics, low energy, 
+and standard 
+physics \cite{embib:uni} are distributed with \Gfour{}. Specific physics 
+constructors are provided for optical physics which can be added 
+on top of any existing physics list.
+
+\begin{table*}
+\caption{List of \Gfour{} EM physics constructors}
+\label{em:physl}
+\begin{center}
+\begin{tabular}{llll}
+\hline
+Constructor& Application& Name & Comment \\ \hline
+\gclass{G4EmStandardPhysics} & HEP &  &default (ATLAS)\\
+\gclass{G4EmStandardPhysics_option1} & & EMV & simplified (CMS)\\
+\gclass{G4EmStandardPhysics_option2} & & EMX & simplified (LHCb)\\
+\hline
+\gclass{G4EmStandardPhysics_option3} & space \& & EMY & detailed  \\
+                             &  medicine &     & standard models\\
+\gclass{G4EmLivermorePhysics} & & LIV & detailed  \\
+                     &       &          &  Livermore models\\
+\gclass{G4EmPenelopePhysics} &  & PEN & detailed \\ 
+                    &  &     & Penelope models\\
+\gclass{G4EmStandardPhysics_option4} &  & EMZ & combining \\
+                             &  &     & best models\\
+\hline
+\gclass{G4EmLivermorePolarizedPhysics} &  &  & polarized models\\
+\gclass{G4EmLowEPPhysics} &  &  & new low energy models\\
+\gclass{G4EmStandardPhysicsWVI} &  &  & WVI multiple scattering\\
+\gclass{G4EmStandardPhysicsSS} &  &  & single scattering \\
+\hline
+\gclass{G4EmDNAPhysics} & DNA &  & default for DNA physics \\
+\gclass{G4EmDNAPhysics_option1} & DNA &  & WVI multiple scattering \\
+\hline
+\gclass{G4OpticalPhysics} & all &  & production and transport \\
+                 &     &  & of optical photons \\
+\hline
+\end{tabular}
+\end{center}
+\end{table*}

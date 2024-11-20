@@ -1,0 +1,38 @@
+
+% NewFeatures.tex
+Time Slicing was added to allow one to produce movies that show the time
+development of an event.  With time slicing enabled, the OpenGL line segments
+that represent a particle trajectory are annotated with time information.  Users
+can then select an OpenGL view that corresponds to a given time, and a sequence
+of such views produces the frames of a time development movie.  Users can 
+produce these movies in any OpenGL viewer by the appropriate use of \Gfour{}
+command macros.  The Qt driver provides a simplified way for users to make such
+movies.
+
+\Gfour{} visualization now has the ability to retain the pointers to 
+previously-viewed events, so that after visualizing a set of events, one can go
+back to the beginning of the set and review the events.  When coupled with 
+customized user code that specifies which events should be kept, one can 
+potentially run a very large set of events and then afterwards choose to 
+visualize only those events that satisfied some personal set of trigger 
+conditions.
+
+The following features have also been added:
+\begin{itemize}
+\item parallel worlds, including layered mass worlds, may now be viewed
+      individually or superimposed on the main geometry world;
+
+\item magnetic fields may be displayed as a set of arrows indicating local
+      field direction, with arrow lengths proportional to field strength;
+
+\item decorations are now supported which allow the user to easily annotate
+      graphical views with text (placed either in 3D coordinates or 
+      in the 2D coordinates of the graphics window), run and event number,
+      arrows, axes, rulers, date stamps and logos;
+
+\item users may adjust the visibility or appearance of geometry by using the 
+      /vis/geometry commands which globally modify the appearance of some set of
+      geometry objects, while the /vis/touchable commands allow control of these
+      objects individually.
+\end{itemize}
+

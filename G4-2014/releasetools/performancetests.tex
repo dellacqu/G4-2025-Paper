@@ -1,0 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% performancetests.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsubsection{Performance Tests}
+\subsubsection{Computing performance benchmarking and monitoring}
+
+Performance evaluation and analysis are essential for monitoring the \Gfour{}
+toolkit through its development cycle for expected and unexpected changes in
+computing performance, and for identifying problems and opportunities for code
+improvement and optimization.  All internal development monthly releases and 
+public releases are profiled with a set of applications that utilize different
+input event samples, physics lists, and detector configurations.  Results from
+multiple runs benchmarking CPU performance and memory use are compared to those
+from previous public releases and development reference releases, and posted on
+a publicly available web-site \cite{tools:g4cpt}.
+  
+In addition to memory footprints and a full summary of call stacks, which 
+includes exclusive and inclusive function path counters, a detailed call graph
+analysis is made available to \Gfour{} developers for further analysis.  The set
+of software tools used in the performance evaluation procedure, both in 
+sequential and multithreaded modes, includes FAST~\cite{tools:FAST}, 
+IgProf~\cite{tools:IgProf} and Open$\mid$Speedshop~\cite{tools:OSS}.  The 
+scalability of CPU time and memory performance in a multithreaded application is
+evaluated by measuring event throughput and memory gain as a function of the 
+number of threads for selected event samples.

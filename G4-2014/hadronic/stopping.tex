@@ -1,0 +1,33 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% stopping.tex
+% Authors: Julia Yarba, Mike Kelsey, Krzysztof Genser
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Stopping models}
+The \Gfour{} toolkit includes processes to simulate the stopping and capture of
+hadrons and heavy leptons on nuclei.  Previous parameterized models for $\pi^-$
+and $K^-$ capture were replaced by the \Gfour{} Bertini intranuclear cascade for 
+negative mesons, baryons and muons, and with the FTF string model for antibaryon
+capture and annihilation.  
+
+The Bertini cascade model handles the capture process by selecting a random
+location within the nucleus, weighted by the radial nucelon density, to initiate
+the cascade process.  The subsequent cascade is propagated using the same code 
+used for any other hadron-nucleus interaction.  In the FTF model, the antibaryon
+annihilates with a nucleon near the outer ``surface'' of the nucleus, producing 
+a small number of pions.  Those secondaries and the excited nucleus are passed 
+either to the \Gfour{} de-excitation model (invoked by \gclass{G4PrecompoundModel}),
+or to one of the cascade models (Bertini or Binary) for final disposition 
+depending on the energy.
+
+Capture of negative muons on nuclei is also handled using the Bertini model.
+The muon capture process deals with the atomic capture, the subsequent 
+electromagnetic cascade of the muon down to the lowest orbit, including
+photon and Auger electron emissions, and the decision about whether the
+bound muon should decay in that orbit or be captured into the nucleus.  If
+the latter, the Bertini cascade selects a random location within the nucleus 
+(weighted as above), where the $\mu^-$ interacts with a proton, producing a 
+neutron, neutrino, and one or more radiative photons.  Note that in \Gfour{} 
+release 10.0 onward, the radiative cross sections have been set to zero.  As 
+above, the neutron is treated as a cascade secondary and processed using the 
+existing code of the Bertini model.
+

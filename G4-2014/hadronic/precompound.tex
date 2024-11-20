@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% precompound.tex
+% Author: Jose-Manuel Quesada
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{The precompound model}
+The native \Gfour{} pre-equilibrium  model is based on a version of the 
+semi-classical exciton model \cite{hadbib:gudima83} and is used as the back-end
+stage of several cascade and quark-gluon string generators.  It handles the 
+de-excitation of the remnant nucleus from its formation immediately following a
+cascade or high energy collision, until it reaches equilibrium.  During this 
+time, internal transitions of the pre-compound nuclear system compete with 
+nucleon and light cluster emissions.  The passage to the state of statistical 
+equilibrium, which happens when the transition probabilities for increasing and 
+decreasing the exciton number become approximately equal (equilibrium condition),
+is roughly characterized by an equilibrium number of excitons $n_{eq}$.  In the
+simulation $n_{eq}$ is a calculated number based on the assumption that the 
+equilibrium condition is met. 
+
+Some refinements were introduced recently 
+\cite{hadbib:calor-2008, hadbib:ijrb-space-2012, hadbib:iaea-spa-2009}, 
+namely more realistic inverse cross section parameterizations and combinatorial
+factors for particle emission, a phenomenological parameterization of the 
+transition matrix elements, and a more physically consistent condition for the 
+transition to equilibrium, since in certain circumstances this condition is 
+reached well before the previously used rough estimate of $n_{eq}$.
+
+At the end of the pre-equilibrium stage, the residual nucleus should be left in
+an equilibrium state, in which the excitation energy is shared by the entire 
+nuclear system.  Such an equilibrated compound nucleus is characterized by its 
+mass, charge and excitation energy with no further memory of the steps which led
+to its formation.
+

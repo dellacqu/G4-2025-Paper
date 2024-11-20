@@ -1,0 +1,119 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% trackscore.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:trackscore}
+\subsection{\textbf{Tracking and Scoring}}
+
+\subsubsection{Design changes in tracking}
+
+The main changes in tracking include easier physics process implementation, new
+infrastructure for the re-acceleration of charged particles in electric fields, 
+and ``reverse Monte Carlo''.  The problem of re-acceleration is not yet solved 
+and requires further development.
+
+Adjoint or ``reverse'' Monte Carlo has been available in \Gfour{} since release 
+9.3 and modifications to tracking were required to make this possible.  The 
+enabling classes have names beginning with \texttt{G4Adjoint}.  Details of these 
+classes and adjoint Monte Carlo can be found in section \ref{sec:biasrev}.
+
+\subsubsection{Concrete scorers}
+
+In \Gfour{}, a hit is a snapshot of a physical interaction or accumulation of 
+interactions of tracks in a sensitive detector component.  ``Sensitive'' here
+refers to the ability of the component to collect and record some aspects of 
+the interactions, and to the \Gfour{} classes which enable this collection.
+Because of the wide variety of \Gfour{} applications, only the abstract classes
+for both detector sensitivity and hit had thus far been provided in the toolkit.
+A user was therefore required to have the expertise necessary to implement the 
+details of how hits were defined, collected and stored.
+
+To relieve many users of this burden, concrete primitive scorers of physics 
+quantities such as dose and flux have been provided which cover general-use 
+simulations.  Flexibly designed base classes allow users to implement their own
+primitive scorers for use anywhere a sensitive detector needs to be simulated.
+
+Primitive scorers were built upon three classes, 
+\gclass{G4Multi\allowbreak{}Functional\allowbreak{}Detector},
+ \gclass{G4VPrimitiveScorer} and
+\gclass{G4VSDFilter}.
+\gclass{G4\allowbreak{}Multi\allowbreak{}Functional\allowbreak{}Detector}
+is a concrete class
+derived from \gclass{G4VSensitive\allowbreak{}Detector} and attached to the
+detector component.  Primitive scorers were developed on top of the base class
+\gclass{G4VPrimitiveScorer}, and as such represent classes to be registered to
+the \gclass{G4MultiFunctionalDetector}.  \gclass{G4VSDFilter} is an abstract
+class for a track filter to be associated with a
+\gclass{G4MultiFunctional\allowbreak{}Detector} or a primitive scorer.
+Concrete track filter classes are also provided.  One example is a charged track
+filter and a particle filter that accept for scoring only charged tracks and a
+given particle species, respectively.
+
+A primitive scorer creates a \texttt{G4THitsMap} object for storing one physics
+quantity for an event.  \texttt{G4THitsMap} is a template class for mapping an 
+integer key to a pointer value.  Since a physics quantity such as dose is 
+generally accumulated in each cell of a detector component during an event or 
+run, a primitive scorer generates a \gclass{G4THitsMap<G4double>} object that 
+maps a pointer to a \gclass{G4double} for a physics quantity, and uses the cell
+number as the integer key.  If a cell has no value, the \gclass{G4THitsMap} 
+object has no corresponding entry and the pointer to the physics quantity 
+returns a null.  This was done to reduce memory consumption, and to distinguish
+an unfilled cell from one that has a value of zero.  The integer key of the cell
+is taken from the copy number of the \texttt{G4LogicalVolume} of the detector 
+component by default.  \Gfour{} also provides primitive scorers for 
+three-dimensional structured geometry, in which copy numbers are taken at each 
+of the depth levels at which of the logical volumes are nested in the geometric
+structure.  These copy numbers are then serialized into integer keys. 
+
+\subsubsection{Command-based scoring}
+
+Command-based scoring is the easiest way to score primitive physics quantities.
+It is based on the primitive scorers and navigation in an auxilliary geometry 
+hierarchy (``parallel world,'' Section \ref{sec:nav}).  Users are not 
+required to develop code, as interactive commands are provided to set up the 
+scoring mesh.
+
+The scoring mesh consists of a scoring volume in a three-dimensional mesh with
+a multifunctional detector, primitive scorers and track filters which may be 
+attached to a primitive scorer.  An arbitrary number of primitive scorers can 
+be registered to the scoring mesh.
+
+A given physics quantity, or score, is accumulated in each cell during a run. 
+Interactive commands allow scores to be dumped into a file and written out in 
+CSV format.  Other commands allow scores to be visualized as color histograms
+drawn on the visualized geometry in either a projection or a selected profile.
+ 
+Because scoring volumes are placed in a parallel world, the scoring volume and
+the mass volume are allowed to overlap.  Command-based scoring can therefore 
+obtain the physics quantity in an arbitrary volume or surface independent of the
+mass volume.  One exception to this is the dose primitive scorer, in which 
+the scoring volumes and their cells must coincide exactly with the mass geometry
+structure.  This is because the mass density of the cell is taken from the mass 
+geometry while the volume of the cell is taken from the scoring geometry. 
+
+%
+% Check that mass geometry and scoring geometry are defined elsewhere
+%
+Most of the command-based scoring is handled in two classes,
+\gclass{G4Scoring\allowbreak{}Manager} and \gclass{G4VScoringMesh}.
+\gclass{G4ScoringManger} is the administrative class of command-based scoring.
+It creates a singleton object which keeps a list of registered scoring meshes,
+and operates the scoring according to interactive commands and commands from 
+the \Gfour{} kernel. \gclass{G4VScoring\allowbreak{}Mesh} is the base class of 
+scoring meshes which represent scoring geometries.  It keeps a list of 
+associated primitive scorers.  The \gclass{G4VScoring\allowbreak{}Mesh} object
+creates a series of \gclass{G4THitsMap} objects in which each primitive scorer
+can accumulate physics quantities in a run. 
+
+Command-based scoring works in both sequential and multithreaded modes.  In
+sequential mode, \gclass{G4RunManager} creates scoring meshes at the beginning
+of a run.  After each event, the \gclass{G4THitsMap} object in
+\gclass{G4VScoring\allowbreak{}Mesh} is updated by adding values in that event
+to the primitive scorer.  In multithreaded mode \gclass{G4MTRunManager} creates
+a master scoring manager.  Each worker thread of \texttt{G4WorkerRunManager} 
+creates its own local scoring manager with scoring meshes.  However, the logical
+volume of the scoring mesh is shared between master and local scoring managers.
+The local scoring manager then accumulates physics quantities in the same manner
+as sequential mode.  At the end of a thread, the worker run manager requests the
+master run manager to merge the scores of the local scoring manager with those
+of the master scoring manager. 
+

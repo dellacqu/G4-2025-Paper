@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% qualityassurance.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Quality assurance}
+Each software release of \Gfour{} is validated against memory management issues,
+in particular run-time memory errors (overwrites, memory corruption, etc.) and 
+memory leaks, through use of the Valgrind~\cite{QA:valgrind} tool.  Verification
+for run-time memory errors is completely automated as part of the system 
+testing nightly builds, so that results for each test included in the testing 
+suite can be retrieved directly from the testing dashboard and monitored along 
+with the normal development process.  Specific sessions of Valgrind runs are 
+executed periodically on a selected set of tests covering a rather wide range of
+physics configurations to verify the absence of memory leaks during the 
+execution of a simulation run for multiple simulated events; a summary of the 
+results is distributed to developers by the release coordinator, together with 
+hints on where problems may originate.  Memory leak checks are usually performed
+on candidate releases as part of the software release process.
+
+The Valgrind tool is also used for detecting errors in multithreaded simulation
+applications, by means of its DRD~\cite{QA:DRD} module.  DRD allows the
+identification of potential data-races happening during run-time among threads,
+when one or more threads try to access the same memory location without proper
+locking or protection.  It also allows easy identification and debugging of
+lock contention cases, when a test program may get stuck in execution.
+
+Static code analysis is regularly applied at every development release, by 
+instrumenting the entire source code with the Coverity~\cite{QA:coverity}
+tool.  The list of defects identified by the tool are first analysed and then
+assigned to the responsible developers for further inspection and correction.
+Since 2010, when this tool was first adopted for quality assurance, almost 3000
+defects (most of them not critical) have been triaged and fixed, with priority
+given to cases of potentially higher impact.
+

@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% xray_opt.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Gfour{} can accurately simulate nonlinear scintillators where the light yield is
+a function of particle type, energy deposition and kinetic energy of the 
+ionizing particle \cite{em:opt1}.  In scintillators with a linear response, 
+light production is directly proportional to the ionizing energy deposited and
+the total light produced can be computed as the sum of the light produced during
+small simulation steps without regard for the kinetic energy of the ionizing 
+particle at each energy-depositing step.
+
+In scintillators with a nonlinear response, the yield during a step is
+calculated as the difference in yields for hypothetical, totally absorbed 
+particles at the kinetic energies before and after the step.  This method 
+correctly models the total light produced by a multiple step ionizing particle 
+track, and accounts for two important cases.  In the first case, light is 
+produced correctly for incomplete energy deposition of a charged particle, such
+as when the particle exits the scintillator volume or when the particle is 
+absorbed in a nuclear reaction.  In the second case, the scintillation photon 
+density is larger in the high kinetic energy portion of the track for the usual
+case where the nonlinear photon yield increases with particle energy.  This 
+enables the precision simulation of organic or noble gas scintillators, provided
+the user supplies the required data inputs.
+
+Two more refinements in the generation of optical photons are that the 
+scintillation process takes into account a finite light emission rise-time, 
+and that the Cerenkov photon origin density along the track segment is no longer 
+constant, but assumes a linear decrease in the mean number of photons generated 
+over the step as the radiating particle slows down.
+
+For the propagation of optical photons, the reflectivity from a metal surface
+may now be calculated by using a complex index of refraction \cite{embib:Iowa}.
+%\footnote{Thanks to Sehwook Lee and John Hauptman (Iowa State 
+%University)} 
+Mie scattering was added following the \mbox{Henyey-Greenstein} approximation, 
+with the forward and backward angles treated separately \cite{embib:Mie}.
+% \footnote{Thanks to Xin Qian (Caltech) based on work from Vlasios 
+% Vasileiou (University of Maryland)} 
+Surface reflections may be simulated using look-up tables containing measured
+optical reflectance for a variety of surface treatments \cite{em:opt2}. It is 
+possible to define anti-reflective coatings, and transmission of a dichroic 
+filter where the transmission, or conversely the reflection, is dependent on 
+wavelength and incident angle.  The optical boundary process also works in 
+situations where the surface is between two volumes, each defined in a different
+parallel world, thus allowing optical photon propagation for previously 
+impossible geometry implementations.
+
+%end

@@ -1,0 +1,22 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% softwareorganisation.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Software organization}
+\Gfour{} software is structured in a directory tree with each category 
+corresponding to a high-level directory.  Categories such as geometry, which
+is comprised of geometry shapes and navigation, and processes, which includes 
+physics interaction models, are recursively subdivided into more and more 
+specialized topics.  In general the C++ classes for each topic, such as a model
+describing a specific type of interaction, are maintained or developed by one 
+or a few developers. 
+
+  Collaborative software revision management is handled by the SVN tool.  During
+the development process, developers are encouraged to commit frequently changes 
+to the trunk of the SVN repository.  When a change within a topic or directory 
+is complete, the developer creates a tag of this code; features of the tag are 
+documented changes in a History file, present in each sub(sub...) directory.  
+A tag may be made of low-, intermediate- or high-level directories.   
+Tags are recorded in the database using SVN commit hooks on the SVN server.  The
+developer can propose such tags for inclusion into future releases using a web 
+interface to the tags database.  Proposed tags will then enter the testing cycle. 

@@ -1,0 +1,59 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% deexcitation.tex
+% Authors: Vladimir Ivantchenko, Jose Manuel Quesada, Gunter Folger
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Nuclear de-excitation models}
+The final de-excitation of a nucleus to a thermalized state is simulated by
+several semi-classical models which are responsible for sampling the 
+multiplicity of neutrons, protons, light ions, isotopes, and photons.  They
+are:
+\begin{itemize}
+\item Fermi break-up (FBU) \cite{hadbib:mfm-bondorf-1995},
+\item statistical multifragmentation \cite{hadbib:mfm-bondorf-1995},
+\item fission, based on the Bohr-Wheeler semi-classical model 
+      \cite{hadbib:jinr-fis-1977, hadbib:inr-fis-1993},
+\item evaporation of nucleons and light fragments, which is handled by models 
+      based on either
+\begin{itemize}
+  \item the Weisskopf-Ewing model \cite{hadbib:weisskopf-1940} for fragments up
+        to and including $\alpha$ particles, or
+  \item the generalized evaporation model (GEM) \cite{hadbib:gem-2001} for the 
+        emission of fragments with masses up to $^{28}$Mg, and 
+\end{itemize}
+\item \gclass{G4PhotonEvaporation}, which simulates the emission of  
+\begin{itemize}
+\item discrete gammas according to the E1, M1 and E2 transition probabilities
+      taken from the PhotonEvaporation database, which in turn is based on 
+      the Evaluated Nuclear Structure Data File (ENSDF) \cite{hadbib:ENSDF}, 
+      and 
+\item continuous gammas according to the E1 giant dipole resonance strength 
+      distribution.
+\end{itemize}
+\end{itemize}
+
+These models are managed by the \gclass{G4ExcitationHandler} class, in which
+they may be invoked in complement or sometimes concurrently with each other.
+Some of them have been thoroughly validated and have undergone continuous 
+improvement in recent years \cite{hadbib:calor-2008, hadbib:pmb-fluka-g4-2011}.
+
+In order to properly describe the double differential cross sections and isotope
+production data of the IAEA spallation benchmark 
+\cite{hadbib-iaea-spa-benchmark,hadbib:iaea-spa-2009}, the standard and GEM 
+models were combined to form a hybrid model, and the fission model was improved
+\cite{hadbib:pnst-preco-2011,hadbib:ijrb-space-2012,hadbib:iaea-spa-2009}.
+
+For radiobiological applications it is essential that the FBU model be used by 
+default for the de-excitation of light fragments (Z $<$ 9, A $<$ 17), taking 
+into account Pauli blocking and all possible decay channels into stable and 
+long-lived fragments.  Validations
+\cite{hadbib:nima-pshenich-2010,hadbib:pmb-fluka-g4-2011}
+triggered many of the refinements to this model.
+
+For proton and ion beam therapy applications, the photon evaporation model, 
+which is critical for the tracking of the Bragg peak from emitted prompt gammas, 
+was improved \cite{hadbib:prompt-gamma-2014}.  The statistical 
+multifragmentation model, responsible for the explosive break-up of heavier hot
+nuclei  (Z $>$ 8, A $>$ 16, and excitation energy $>$ 3 MeV/u), is relevant 
+in simulations of shielding from cosmic radiation and has also been validated
+\cite{hadbib:ijrb-space-2012,hadbib:nima-pshenich-2010}. 
+

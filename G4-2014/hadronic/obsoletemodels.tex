@@ -1,0 +1,22 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% obsoletemodels.tex
+% Author: Dennis Wright
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Obsolete models}
+The first \Gfour{} hadronic models, the Low Energy Parameterized (LEP) and 
+High Energy Parameterized (HEP), were both re-engineered versions of the Fortran
+code Gheisha \cite{hadbib:gheisha}.  In their original form they were designed
+and tuned to reproduce high energy shower shapes.  They conserved energy on
+average, but not on an event-by-event basis.  With the advent of more 
+theoretically detailed models, both LEP and HEP models were removed from version
+10.0 of the toolkit.
+
+Prior to \Gfour{} 10.0, a number of models and cross section sets dealing
+with nuclear de-excitation, hadron capture, gamma-nuclear and lepton-nuclear 
+reactions were implemented by the Chiral Invariant Phase Space (CHIPS) package.
+Since version 10.0, most of these reactions have been implemented by other models 
+although some of the cross sections still maintain the original CHIPS coding.
+
+Lastly, the isotope production model, used to count recoil nuclei produced in
+various reactions, was removed in version 10.0, as all hadronic models now 
+produce recoil nuclei explicitly.

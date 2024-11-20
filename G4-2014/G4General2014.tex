@@ -1,0 +1,648 @@
+%%
+%% Copyright 2007, 2008, 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%%
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+%%
+%%
+%%
+%% $Id: elsarticle-template-num.tex 4 2009-10-24 08:22:58Z rishi $
+%%
+%%
+%%% DHW single column 
+% \documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%%  71 pages with following line: DHW  
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+\documentclass[final,5p,times,longtitle,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+%% \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+\usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+\usepackage{verbatim}
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{url}
+\newcommand{\greeksym}[1]{{\usefont{U}{psy}{m}{n}#1}}
+\newcommand{\umu}{\mbox{\greeksym{m}}}
+\newcommand{\udelta}{\mbox{\greeksym{d}}}
+\newcommand{\uDelta}{\mbox{\greeksym{D}}}
+\newcommand{\uPi}{\mbox{\greeksym{P}}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\Gfour}{{\scshape Geant4}}
+
+%% For MT section
+\newcommand{\gclass}[1]{\texttt{#1}}
+\newcommand{\gmethod}[1]{\texttt{#1}}
+\newcommand{\userclass}[1]{\texttt{#1}}
+\newcommand{\gkeyword}[1]{\texttt{#1}}
+\newcommand{\thread}{\texttt{\_\_thread} }
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+% \usepackage{lineno}
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+
+\journal{Nuclear Instruments and Methods in Physics Research A}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for the associated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for the associated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for the associated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+% \title{Recent Developments in Geant4\tnoteref{label1}}
+% \tnotetext[label1]{Note here}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+% \title{Recent Developments in Geant4 \vspace{0.75cm}}
+\title{Recent Developments in Geant4}
+
+%% use optional labels to link authors explicitly to addresses:
+%% Get numerical superscripts
+% \def\theaffn{\arabic{affn}}
+
+\author[a,b]{J. Allison}
+\address[a]{Geant4 Associates International Ltd., 9 Royd Terrace, Hebden Bridge HX7 7BT, United Kingdom}
+\address[b]{The University of Manchester, School of Physics and Astronomy, Manchester M13 9PL, United Kingdom}
+
+\author[c,a]{K. Amako}
+\address[c]{KEK, 1-1 Oho, Tsukuba, Ibaraki 305-0801, Japan}
+
+\author[d]{J. Apostolakis}
+\address[d]{CERN, 1211 Gen\'{e}ve 23, Switzerland}
+
+\author[e]{P. Arce}
+\address[e]{CIEMAT, Medical Applications Unit, Avenida Complutense 40, 28040 Madrid, Spain}
+
+\author[f]{M. Asai}
+\address[f]{SLAC National Accelerator Laboratory, 2575 Sand Hill Road, Menlo Park, CA 94025, USA}
+
+\author[g]{T. Aso}
+\address[g]{National Institute of Technology, Toyama College, 1-2 Ebie Neriya, Imizu, Toyama 9330293, Japan}
+
+\author[h]{E.~Bagli}
+\address[h]{INFN Sezione di Ferrara, Via Saragat 1, 44122 Ferrara, Italy}
+
+\author[i]{A. Bagulya}
+\address[i]{Lebedev Physical Institute, Leninskii Pr. 53, Moscow 119991, Russia}
+
+\author[j]{S. Banerjee}
+\address[j]{Fermi National Accelerator Laboratory, P.O. Box 500, Batavia, IL 60510, USA}
+
+\author[k]{G. Barrand}
+\address[k]{IN2P3/LAL, Universite Paris-Sud, Orsay, France}
+
+\author[l]{B.R.~Beck}
+\address[l]{Lawrence Livermore National Laboratory, 7000 East Avenue, Livermore, CA 94550, USA}
+
+\author[m]{A.G.~Bogdanov}
+\address[m]{National Research Nuclear University (Moscow Engineering Physics Institute), 
+            Kashirskoe shosse 31, Moscow 115409, Russia}
+
+\author[n]{D. Brandt}
+\address[n]{SSW Trading, Am Knick 4, Oststeinbek, Germany}
+
+\author[o]{J.M.C. Brown}
+\address[o]{Queen's University Belfast, School of Mathematics and Physics, University Road, Belfast, Northern Ireland BT7 1NN, United Kingdom}
+
+\author[d]{H.~Burkhardt}
+
+\author[j]{Ph. Canal}
+
+\author[p]{D.~Cano-Ott} 
+\address[p]{CIEMAT, Centro de Investigaciones Energ\'{e}ticas Medioambientales y Tecn\'{o}logicas, Avenida Complutense 40, 28040 Madrid, Spain} 
+
+\author[q]{S. Chauvie}
+\address[q]{Sante Croce e Carle Hospital, Via Coppino 26, I-12100, Cuneo, Italy}
+
+\author[r]{K. Cho}
+\address[r]{National Institute of Supercomputing and Networking, Korea Institute of Science and Technology Information, 245 Daehak-ro, Yuseonggu, Daejeon 34141, Korea}
+
+\author[s]{G.A.P.~Cirrone}
+\address[s]{Istituto Nazionale di Fisica Nucleare, Laboratori Nazionali del Sud,
+            Via Santa Sofia 62, 95123 Catania, Italy}
+
+\author[t]{G. Cooperman}
+\address[t]{Northeastern University, College of Computer and Information Science, 202-WVH, Boston, MA 02481, USA}
+
+\author[u]{M.A. Cort\'{e}s-Giraldo}
+\address[u]{Universidad de Sevilla, Departamento de F\'{i}sica At\'{o}mica, Molecular y Nuclear, Apdo. 1065, E-41080, Sevilla, Spain} 
+
+\author[d]{G. Cosmo}
+
+\author[s]{G. Cuttone} 
+
+\author[x]{G. Depaola}
+\address[x]{Universidad Nacional de C\'ordoba - FaMAF, Medina Allende s/n., C\'ordoba, Argentina}
+
+\author[bt]{L.~Desorgher}
+\address[bt]{Institut de Radiophysique, Rue du Grand-Pr\'{e} 1 CH-1007, Lausanne, Switzerland}
+
+\author[t]{X. Dong}
+
+\author[f]{A.~Dotti}
+
+\author[j]{V.D.~Elvira}
+
+\author[d]{G. Folger}
+
+\author[v]{Z. Francis}
+\address[v]{Universite Saint Joseph, Department de Physique, Beirut, Lebanon} 
+
+\author[w]{A. Galoyan}
+\address[w]{Veksler and Baldin Laboratory of High Energy Physics,
+            Joint Institute for Nuclear Research,
+            Joliot-Curie 6, Dubna, Moscow region, Russia, 141980}
+
+\author[k]{L. Garnier\fnref{1}}
+\fntext[1]{current affiliation: OSUR/CNRS Observatoire des 
+           Sciences de l'Univers de Rennes, Universit{\'e} de Rennes1, Campus de
+           Beaulieu, 35042 Rennes Cedex, France}
+
+\author[d]{M. Gayer}
+
+\author[j]{K.L.~Genser}
+
+\author[i,d]{V.M.~Grichine}
+
+\author[y,z]{S.~Guatelli}
+\address[y]{University of Wollongong, Centre for Medical Radiation Physics, 
+            Northfields Avenue, Wollongong, NSW 2522, Australia}
+\address[z]{Illawarra Health and Medical Research Institute, Northfields Avenue,
+            Wollongong, NSW 2522, Australia}
+ 
+\author[aa]{P.~Gu\`{e}ye}
+\address[aa]{Hampton University, Physics Department, 100 E. Queen Street,
+             Hampton, VA 23668, USA}
+
+\author[ab]{P. Gumplinger}
+\address[ab]{TRIUMF, 4004 Wesbrook Mall, Vancouver, BC V6T 2A3, Canada}
+
+\author[ac]{A.S. Howard}
+\address[ac]{ETH Z{\"u}rich, IPP, Otto-Stern-Weg 5, 8093 Z{\"u}rich, Switzerland}
+
+\author[ad]{I. H\v{r}ivn\'{a}\v{c}ov\'{a}}
+\address[ad]{Institut de Physique Nucl\'{e}aire, Universit\'{e} Paris-Sud,
+             CNRS-IN2P3, 15 rue Georges, Clemenceau, 91406 Orsay, Cedex, France}
+
+\author[r,ae]{S.~Hwang}
+\address[ae]{University of Science and Technology, 217 Gajeong-ro Yuseonggu,
+             Daejeon, Korea}
+
+\author[af,ag]{S. Incerti}
+\address[af]{CNRS-IN2P3, CENBG, UMR 5797, F-33170 Gradignan, France}
+\address[ag]{Universit\'{e} Bordeaux, CENBG, UMR 5797, F-33170 Gradignan, France}
+
+\author[ah,a,d]{A.~Ivanchenko}
+\address[ah]{Centre d'Etudes Nucl\'{e}aires de Bordeaux Gradignan,
+             19 Chemin du Solarium, 33175 Gradignan, France}
+
+\author[d,a,ai]{V.N.~Ivanchenko}
+\address[ai]{Ecoanalytica, Moscow 119899, Russia}
+
+\author[ab]{F.W. Jones}
+
+\author[j]{S.Y.~Jun}
+
+\author[aj,ak]{P.~Kaitaniemi\fnref{2}}
+\address[aj]{CEA/Saclay, Centre de Saclay, Irfu/SPhN, F-91191 Gif-sur-Yvette, France}
+\address[ak]{Helsinki Institute of Physics, P.O. Box 64, Gustaf H{\"a}llstr{\"o}m 
+            Street 2, FI-00014, University of Helsinki, Finland}
+\fntext[2]{current affiliation: Pandia Oy, Hiomotie 10, 5th floor, 00380 Helsinki, Finland}
+
+\author[al,am]{N. Karakatsanis\fnref{3}}
+\address[al]{National Technical University of Athens, School of Electrical and
+             Computer Engineering, 9 Iroon Polytechniou St., Zografos, Athens 15780,
+             Greece}
+\address[am]{Johns Hopkins University, School of Medicine, 601 N. Caroline St.,
+             Baltimore, MD 21287, USA}  
+\fntext[3]{current affiliation: Translational and
+               Molecular Imaging Institute, Icahn School of Medicine at Mt. Sinai,
+               1470 Madison Avenue, New York, NY 10029, USA}
+
+\author[an]{M. {\"K}aramitrosi}
+\address[an]{Notre Dame University, Notre Dame Radiation Laboratory, Notre Dame,
+            IN 46556, USA}
+
+\author[f]{M.~Kelsey}
+
+\author[ao]{A.~Kimura}
+\address[ao]{Ashikaga Institute of Technology, Omae 268-1, Ashikaga, Tochigi 326-8558,
+             Japan}
+
+\author[f]{T.~Koi}
+
+\author[ap]{H.~Kurashige}
+\address[ap]{Kobe University, 1-1 Rokkodai, Nada, Kobe 657, Japan}
+
+\author[d]{A. Lechner}
+
+\author[aq]{S.B. Lee}
+\address[aq]{National Cancer Center, 323 Insa-ro, Ilsandong-gu, Goyang-Si,
+             Gyeonggi-do 10408, Korea}
+
+\author[ar,as]{F.~Longo}
+\address[ar]{University of Trieste, Department of Physics, Via Valerio 2, 34127 Trieste, Italy}
+\address[as]{INFN, Trieste, Via Valerio 2, 34127 Trieste, Italy}
+
+% \author{M. {\"M}aire\fnref{at,a}}
+\author[at,a]{M. Maire}
+\address[at]{IN2P3/LAPP, 74941 Annecy-le-vieux, France}
+
+\author[au]{D. Mancusi}
+\address[au]{CEA, Centre de Saclay, DEN/DANS/DM2S/SERMA/LTSD, 91191 Gif-sur-Yvette, CEDEX, France}
+
+\author[av]{A.~Mantero}
+\address[av]{SWHARD srl, Via greto di Cornigliano 6R, Genova, Italy}
+
+\author[p]{E.~Mendoza}
+
+\author[aw]{B.~Morgan}
+\address[aw]{University of Warwick, Department of Physics, Gibbet Hill Road,
+             Coventry CV4 7AL, United Kingdom}
+
+\author[c]{K.~Murakami}
+
+\author[d]{T. Nikitina}
+
+\author[s]{L. Pandola}
+
+\author[d]{P. Paprocki\fnref{4}}
+\fntext[4]{current affiliation: Elarcos, Kabacki Dukt 8/32,
+           02-798 Warsaw, Poland}
+
+\author[f]{J.~Perl}
+
+\author[ax]{I. Petrovi\'{c}} 
+\address[ax]{University of Belgrade, Vin\v{c}a Institute of Nuclear Sciences,
+             P.O. Box 522, 11001, Belgrade, Serbia}
+
+\author[ay]{M.G. Pia}
+\address[ay]{INFN Sezione di Genova, Via Dodecaneso 33, 16136 Genova, Italy}
+
+\author[d]{W.~Pokorski}
+
+\author[u]{J.M.~Quesada}
+
+\author[az]{M.~Raine}
+\address[az]{CEA, DAM, DIF, F-91297, Arpajon, France}
+
+\author[ba,bb]{M.A. Reis}
+\address[ba]{C2TN, Instituto Superior T\'{e}cnico,
+             Universidade de Lisboa,
+             Campus Tecnol\'{o}gico e Nuclear,
+             EN10 km139.7, 2685-066 Bobadela LRS, Portugal}
+\address[bb]{IEQUALTECS, Lda, Rua Dr. Francisco S\'{a} Carneiro, 36, 2500-065
+             S. Greg\'{o}rio CLD, Portugal}
+
+\author[d]{A.~Ribon}
+
+\author[ax]{A. Risti\'{c} Fira}
+
+\author[s]{F. Romano}
+
+\author[s,bc]{G.~Russo}
+\address[bc]{IBFM-CNR, Contrada Pietrapollastra, Pisciotta, 90020 Cefalu, Italy}
+
+\author[bd,be]{G. Santin}
+\address[bd]{European Space Agency/ESTEC, Keplerlaan 1, 2201AZ, Noordwijk, The Nehterlands}
+\address[be]{RHEA System BV, Jonckerweg 18, 2201DZ, Noordwijk, The Nehterlands}
+
+\author[c,bf]{T.~Sasaki}
+\address[bf]{SOKENDAI, 1560-35, Hayama, Kanagawa 240-0193, Japan}
+
+\author[bg]{D. Sawkey}
+\address[bg]{Varian Medical Systems, 3120 Hansen Way, Palo Alto, CA 94304, USA}
+
+\author[aq]{J.I.~Shin\fnref{5}}
+\fntext[5]{current affiliation: Korea Institute of Radiological
+           and Medical Sciences, 75 Nowon-ro, Nowon-gu, Seoul, 139-706 Korea}
+
+\author[bh]{I.I.~Strakovsky}
+\address[bh]{The George Washington University, Department of Physics, Washington, DC 20052, USA}
+
+\author[ba]{A.~Taborda}
+
+\author[bi]{S. Tanaka}
+\address[bi]{Ritsumeikan University, College of Information Science and Engineering, 
+             Noji-higashi 1-1-1, Kusatsu, Shiga 525-8577, Japan}
+
+\author[bj]{B. Tom{\'e}}
+\address[bj]{LIP-Lisboa/IST, Av. Elias Garcia, 14-1, 1000-149, Lisboa, Portugal}
+
+\author[bk]{T. Toshito}
+\address[bk]{Nagoya Proton Therapy Center, 1-1-1 Hirate-cho, Kita-ku, Nagoya 462-8508, Japan}
+
+\author[bl,bm]{H.N.~Tran}
+\address[bl]{Ton Duc Thang University, Division of Nuclear Physics, 19 Nguyen Huu Tho Street,
+             Tan Phong Ward, District 7, Ho Chi Minh City, Vietnam}
+\address[bm]{Ton Duc Thang University, Faculty of Applied Sciences, 19 Nguyen Huu Tho Street,
+             Tan Phong Ward, District 7, Ho Chi Minh City, Vietnam}
+
+\author[bn]{P.R.~Truscott}
+\address[bn]{Kallisto Consultancy Ltd., Farnborough, Hampshire, GU14 9AJ, United Kingdom}
+
+\author[a]{L. Urban}
+
+\author[bo]{V. Uzhinsky}
+\address[bo]{Laboratory of Information Technologies,
+             Joint Institute for Nuclear Research,
+             Joliot-Curie 6, Dubna, Moscow region, Russia, 141980} 
+
+\author[l]{J.M. Verbeke}
+
+\author[bp]{M.~Verderi}
+\address[bp]{Universit{\'e} Paris-Saclay, Laboratoire Leprince-Ringuet, Ecole Polytechnique,
+             CNRS/IN2P3, 91128, Palaiseau, France}
+
+\author[bq]{B.L. Wendt}
+\address[bq]{Idaho State University, 921 South 8th Avenue, Pocatello, ID 83209, USA}
+
+\author[j]{H.~Wenzel}
+
+\author[f]{D.H.~Wright}
+
+\author[l]{D.M.~Wright}
+
+\author[br]{T.~Yamashita}
+\address[br]{Hyogo Ion Beam Medical Center, Tatsuno, Japan}
+
+\author[j]{J.~Yarba}
+
+\author[bs,a]{H. Yoshida}
+\address[bs]{Naruto University of Education, Takashima, Naruto-shi, Japan}
+
+
+\begin{abstract}
+\Gfour{} is a software toolkit for the simulation of the passage of particles
+through matter.  It is used by a large number of experiments and projects in a
+variety of application domains, including high energy physics, astrophysics and
+space science, medical physics and radiation protection.  Over the past several
+years, major changes have been made to the toolkit in order to accommodate the
+needs of these user communities, and to efficiently exploit the growth of 
+computing power made available by advances in technology.  The adaptation of 
+\Gfour{} to multithreading, advances in physics, detector modeling and 
+visualization, extensions to the toolkit, including biasing and reverse Monte
+Carlo, and tools for physics and release validation are discussed here.
+\end{abstract}
+
+\begin{keyword}
+high energy physics \sep nuclear physics \sep radiation \sep simulation \sep computing 
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%%
+%% Start line numbering here if you want
+%%
+% DHW \begin{linenumbers}
+
+%% main text
+\section{The Evolution of \Gfour{}}
+
+\input{evolution.tex}
+
+\section{Multithreading}
+
+% Authors: Makoto Asai, Andrea Dotti, John Apostolakis, Gene Cooperman, Gabriele Cosmo
+\input{multithreading.tex}
+
+\section{Kernel Functionalities}
+
+  % Authors: Takashi Sasaki and Tsukasa Aso
+  \input{trackscore.tex}
+
+  % Author: Gabriele Cosmo
+  % not yet complete:
+  %                   John Ap.: steppers, safety, extension in field
+  \input{detectormodeling.tex}
+
+  \subsection{\textbf{Visualization}}
+  \input{visualization/visualization.tex}
+
+\section{Recent Developments in Physics Modeling}
+  \input{electromagnetic/emphysics.tex}
+
+  \input{hadronic/hadphysics.tex}
+
+  % Authors: Gunter Folger
+  \input{physicslists.tex}
+
+  % Authors: Alberto Ribon, Andrea Dotti, Vladimir Ivantchenko, Witek Pokorski
+  \input{physicsresults.tex}
+
+\section{Toolkit Extensions}
+
+  % Authors: Marc Verderi, Pedro Arce : mostly complete
+  \input{biasreverse.tex}
+
+  % Author: Pedro Arce
+  \input{errorprop.tex}
+
+  \input{analysis.tex} 
+
+  \input{examples.tex}
+
+\section{Validation}
+  % Authors: Gunter Folger, Gabriele Cosmo
+  \input{releasetools.tex}
+
+  % Authors: Julia Yarba, Hans Wenzel, Alberto Ribon, Andrea Dotti, Witek Pokorski
+  \input{physvaltools.tex}
+
+\section{Outlook for the Next Decade}
+  \input{outlook.tex}
+
+\section*{Acknowledgements}
+The authors gratefully acknowledge the support of this work which has come 
+directly and indirectly from many sources, too numerous to mention.  
+Acknowledged as well is the generous support of experiment collaborations and
+universities who have allowed their members to contribute significant time and
+effort to the development, testing and validation of \Gfour{}.  The authors also
+express appreciation of the users of \Gfour{}, many of whom have contributed 
+code, spotted and fixed problems and disseminated \Gfour{} throughout many 
+disciplines.  Finally, the authors thank KEK for providing the funds to cover 
+publication of this article.
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%% \section{}
+%% \label{}
+
+%%
+%% Following citation commands can be used in the body text:
+%% Usage of \cite is as follows:
+%%   \cite{key}         ==>>  [#]
+%%   \cite[chap. 2]{key} ==>> [#, chap. 2]
+%%
+
+%% References with bibTeX database:
+
+% \bibliographystyle{elsarticle-num}
+% \bibliography{<your-bib-database>}
+
+%% Authors are advised to submit their bibtex database files. They are
+%% requested to list a bibtex style file in the manuscript if they do
+%% not want to use elsarticle-num.bst.
+
+%% References without bibTeX database:
+
+\begin{thebibliography}{00}
+
+\bibitem{bib:generalpaper2} J. Allison et al.,
+                            IEEE Transactions on Nuclear Science 53, 270 (2006).
+
+\input{multithreading_biblio.tex}
+
+\input{detmodeling_biblio.tex}
+
+\input{vis_biblio.tex}
+
+\bibitem{bib:G4}S. Agostinelli et al., Geant4 a simulation toolkit, 
+                Nuclear Instruments and Methods in Physics Research A 506 250 (2003).
+%250-303
+
+\bibitem{bib:uni}V. Ivanchenko et al., Recent improvements in Geant4 electromagnetic physics
+                 and interfaces, Progress in Nuclear Science and Technology 2 (2011) 898.
+
+\input{electromagnetic/biblio.tex}
+
+\input{hadronic/bibliohad.tex}
+
+\bibitem{bib:QBBC} A.V. Ivantchenko, V.N. Ivantchenko, J.-M.Q. Molina, S.L. Incerti,
+                   International Journal of Radiation Biology 88 (2012) 171.
+
+\input{physicsresults_biblio.tex}
+
+\bibitem{bib:SK} V.B. Melas, On the efficiency of the splitting and roulette approach 
+                             for sensitivity analysis, Proceedings of the 1997 Winter
+                             Simulation Conference, pp. 269-274.  
+
+\bibitem{bib:ImpS} H. Kahn, Applications of Monte Carlo, Report AECU-3259,
+                            Rand Corporation, Santa Monica, California (1954).
+
+\bibitem{bib:biasGeneral} G. Rubino and B. Tuffin,
+                          Rare Event Simulation using Monte Carlo Methods,
+                          Wiley Publishing 2009,
+                          ISBN:0470772697 9780470772690,
+                          and references therein.
+
+\bibitem{bib:revMC} L. Desorgher, F. Lei and G. Santin, Nuclear Instruments and Methods
+                    in Physics Research A 621 (2010) 247.
+
+\bibitem{bib:exptran} H. Kahn, Nucleonics 6(5) (1950) 27;
+                      H. Kahn, Nucleonics 6(6) (1950) 60.
+
+% \bibitem{bib:forced} Forced interaction reference.
+
+\bibitem{bib:MCNP} X-5 Monte Carlo team, Monte Carlo N-Particle Transport Code, 
+                   Los Alamos report LA-UR-03-1987,
+                   Los Alamos National Laboratory (2003).
+
+\bibitem{bib:Weller} M. H. Mendenhall and R. A. Weller,
+                     Nuclear Instruments and Methods in Physics Research A
+                     667 (2012) 38.
+
+\input{errprop_biblio.tex}
+
+\input{analysis_biblio.tex}
+
+% \bibitem{bib:visprogress}J.~Allison, L.~Garnier, A.~Kimura, J.~Perl,
+% The Geant4 Visualization System - A Multi-Driver Graphics System,
+% International Journal of Modeling, Simulation, and Scientific Computing,
+% Vol.~4, Suppl.~1~(2013)~1340001
+
+\input{releasetools/biblio_releasetools.tex}
+
+\input{physvaltools_biblio.tex}
+
+\bibitem{bib:Dotti} A. Dotti et al., ``Extending Geant4 Parallelism with External
+                    Libraries (MPI, TBB) and its Use on HPC Resources," IEEE/NSS 2015
+                    Conference Record (to be published),
+                    ArXiv: \url{http://arxiv.org/abs/1605.01792}. 
+
+\bibitem{bib:Szo} P. Szostek et al., ``Beyond core count: a look at new mainstream 
+                  computing platforms for HEP workloads,''
+                  Journal of Physics Conference Series 513 (2014) 062036. 
+
+\end{thebibliography}
+
+% DHW \end{linenumbers}
+
+\end{document}
+

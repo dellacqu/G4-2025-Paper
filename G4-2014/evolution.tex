@@ -1,0 +1,94 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% evolution.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:evolution}
+
+A major trend in modern experimental science is the increased reliance upon
+simulation to design complex detectors and interpret the data they produce.
+Indeed, simulation has become mission-critical in fields such as high energy
+physics and space science.  Another trend is the rapid increase in computing
+power due to faster processors, multi-core architectures and distributed 
+computing.  At the same time, advances in memory technology have not kept
+pace and the amount of memory available per CPU cycle has decreased.  These 
+trends have led to a re-examination of some of the basic assumptions of 
+simulation computing, and to the evolution of the \Gfour{} simulation toolkit.
+
+The toolkit approach has enabled \Gfour{} to serve a wide variety of user 
+communities and to change as users' needs change.  Now sixteen years since its
+initial public release, \Gfour{} continues to be the simulation engine of choice 
+for high energy physics experiments at the LHC.  ESA and NASA have used and 
+continue to use \Gfour{} in the design of spacecraft and the estimation of 
+radiation doses received by astronauts and electronic components.  It is also 
+used extensively in medical physics applications such as particle beam therapy, 
+microdosimetry and radioprotection.  The basic extensibility of the toolkit 
+has facilitated its expansion into new user domains, such as biochemistry,
+material science and non-destructive scanning.   
+
+Common to nearly all these domains, but especially true for high energy physics,
+is the demand for increasingly detailed geometries and more sophisticated 
+physical models.  This in turn drives the need for more CPU cycles, and the 
+relative decrease of memory drives the need for more efficient memory 
+management.  
+
+It became clear that \Gfour{} could meet these challenges by adopting the 
+multithreading approach and exploiting the multi-core architectures that have 
+now become commonplace.  While significant effort went into the implementation 
+of multithreading, the object-oriented design of the toolkit made the changes 
+much less intrusive than might have been expected.  Section 2 of this document
+will discuss the details and performance of this implementation.
+
+The remainder of the document will deal with other improvements in the toolkit
+since the last \Gfour{} general paper \cite{bib:generalpaper2}.
+Section 3 covers improvements in kernel functionalities.  Among these are
+new tracking and scoring capabilities, improved geometry models which have 
+resulted in faster, more versatile experimental representations, and improved 
+visualization techniques which provide users with more powerful ways to view 
+them.  Section 4 provides updates in electromagnetic and hadronic physics 
+modeling with discussions of recently introduced models, improvements in 
+existing models and physics lists, and results from comparisons to data.
+Extensions of the toolkit, including a new generic biasing framework, reverse
+Monte Carlo, native analysis capability, and improved examples, are covered 
+in Section 5.  Section 6 describes the extensive improvements in testing and
+validation.  Modern web interfaces and standard testing tools have made it 
+easier for users and developers alike to evaluate the performance of \Gfour{}.
+The adoption of modern build tools addressed the need for flexible 
+configuration and support on various computing platforms, as well as the 
+ever-increasing number of data files needed by physics models.
+This document concludes in Section 7 with a brief summary of \Gfour{} progress
+and a discussion of prospects for the next decade.
+
+\textit{A primer of terms.}
+A number of terms within \Gfour{} have meanings which differ somewhat from 
+general usage.  Although defined elsewhere \cite{bib:generalpaper2}, they are
+reviewed here for convenience.
+
+A \textit{track} is a snapshot of a particle at a particular point along its
+path.  Instances of the class \gclass{G4Track} contain the particle's current
+energy, momentum, position, time and so on, as well as its mass, charge,
+lifetime and other quantities.
+
+A \textit{trajectory} is a collection of track snapshots along the particle
+path.
+
+A \textit{step} consists of the two endpoints which bound the fundamental
+propagation unit in space or time.  The length between the two points is chosen
+by a combination of transportation and physics processes, and may be limited
+to a fixed size by the user in cases where small step lengths are desired.  An
+instance of \gclass{G4Step} stores the change in track properties between the 
+two endpoints.
+
+\textit{Process} has two meanings in \Gfour{}.  In the usual computer science 
+sense, it refers to an instance of an application which is being executed.  This
+is the meaning assumed in the discussion of multithreading.  In all 
+other discussions the narrow \Gfour{} meaning is assumed: a class implementing a
+physical or navigational interaction.  A \Gfour{} process is categorized by when 
+the interaction occurs, either at the end of the step (\gclass{PostStep}) or 
+during the step (\gclass{AlongStep}).
+
+An \textit{event} consists of the decay or interaction of a primary particle and
+a target, and all subsequent interactions, produced particles and four-vectors.
+\gclass{G4Event} objects contain primary vertices and particles, and may contain
+hits, digitizations and trajectories.
+
+A \textit{run} consists of a series of events.
+

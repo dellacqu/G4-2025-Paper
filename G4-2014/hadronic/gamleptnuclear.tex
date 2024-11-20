@@ -1,0 +1,30 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% gamleptnuclear.tex
+% Authors: Dennis Wright, Mike Kelsey
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Gamma- and lepto-nuclear models}
+Due to the relatively small electromagnetic coupling, gamma- and lepto-nuclear
+reactions play a small role in high energy physics calorimetry. They are 
+important, though, for nuclear, medium energy and cosmic ray physics.  For this 
+reason \Gfour{} models for these reactions were extended and improved.  
+
+The \gclass{G4PhotoNuclearProcess} is implemented by two models, the Bertini 
+cascade below 3.5 GeV and the Quark-Gluon-String (QGS) model above 3 GeV.  Both
+models treat the incident gamma as if it were a hadron interacting with a 
+nucleon within the nuclear medium.  Nevertheless, below 30 MeV the Bertini model
+does capture some collective nuclear effects such as the giant dipole resonance.
+
+Both the electro-nuclear and muon-nuclear models
+(\gclass{G4ElectroVD\allowbreak{}Nuclear\allowbreak{}Model}
+and \gclass{G4MuonVD\allowbreak{}Nuclear\allowbreak{}Model}) exploit two
+features of the hybrid electromagnetic hadronic interaction: the factorization
+of the interaction into separate hadronic and electromagnetic parts and the 
+treatment of the exchanged 
+photon as if it were a hadron.  The electromagnetic vertex produces a virtual 
+photon from a two-dimensional cross section table and uses the method of 
+equivalent photons to make the photon real.  As in the photo-nuclear case 
+mentioned above, the photon is then treated as a hadron for the remainder of the
+interaction.  For real photons below 10 GeV the Bertini cascade handles the 
+interaction;  above 10 GeV the photon is converted to a neutral pion and the 
+interaction proceeeds using the FTF string model.
+

@@ -1,0 +1,40 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% cascade.tex
+% Authors: Mike Kelsey, Davide Mancusi, Gunter Folger, Dennis Wright
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Intranuclear cascade models}
+% \noindent {\emph{Intranuclear cascade models}}
+Three intranuclear cascade models are now offered in \Gfour{}: Bertini, Binary
+and INCL++.  The extended Bertini cascade \cite{hadbib:bert} is valid for
+p, n, $\pi$, K, $\Lambda$, $\Sigma$, $\Xi$, $\Omega$ and $\gamma$ projectiles
+with incident energies between 0 and 15 GeV.  It is also valid for captured 
+$\mu^-$ , $K^-$ and $\Sigma^-$.  Recent extensions allow this model to be used
+for cascades initiated by high energy muons and electrons.  Although this model
+has its own precompound and deexcitation code, an option exists for using the 
+native \Gfour{} precompound and deexcitation modules discussed in the following
+section.
+%  \cite{hadbib:pnst-preco-2011}.
+
+The Binary cascade \cite{hadbib:binary} simulates p and n-induced cascades
+below 10 GeV, and $\pi$-induced cascades below 1.3 GeV.  This is done by 
+propagating hadrons in a smooth nuclear potential, and forming and decaying 
+strong resonances to produce secondaries.  The model relies on the native 
+\Gfour{} precompound and deexcitation code to handle the post-cascade steps. 
+
+The Li\`ege Intranuclear Cascade model (\incl) \cite{hadbib:incl} has seen
+extensive development since its introduction in \Gfour{}. The original Fortran 
+model was completely redesigned and rewritten in C++ and is now known as 
+\inclxx\ \cite{hadbib:inclxx}. It extends the applicability of the legacy 
+version up to $\sim15$~GeV incident energy, while remaining physics-wise 
+equivalent for nucleon- and pion-induced reactions below 1~GeV. In addition,
+\inclxx\ has been extended to handle reactions induced by light ions up to
+$A=18$.  By default, \inclxx\ uses the \Gfour{} native de-excitation immediately
+after the cascade stage; it does not include an intermediate pre-equilibrium 
+step.  Coupling to the \abla\ de-excitation model \cite{hadbib:ablav3} is also
+possible.
+
+% Quesada, J.M., Ivantchenko V., Ivantchenko A., Cortes M.A., Folger G.,
+% Howard A., Wright D. Recent Developments in Pre-Equilibrium and 
+% De-excitation Models in Geant4. Progress in Nuclear Science and Technology. 
+% Proceedings of the Joint International Conference Supercomputing in Nuclear 
+% Applications and Monte Carlo 2010. October 17-21. Tokyo, Japan.

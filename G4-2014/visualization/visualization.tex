@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% visualization.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \subsection{Visualization}\label{sec:viz}
+
+\Gfour{} visualization capabilities \cite{vis:Allison} have been extended to
+leverage new user interface technologies, such as Qt \cite{vis:Qt}, and to 
+extend many features in response to user needs.  In many cases, visualization 
+solutions that previously required extensive user coding are now provided 
+through rich built-in functionality. \Gfour{} offers the user many options for
+visualization drivers, some of which are always installed, others of which 
+require that the user's system include particular external libraries.  
+Available visualization drivers include the basic OpenGL-based \cite{vis:OGL}
+drivers (OGLX, 
+OGLWin32 and OGLXm), three OpenGL drivers which are more interactive (Qt, 
+OpenInventor \cite{vis:OI} and OIXE) and the file-based drivers HepRApp 
+\cite{vis:HPRP}, RayTracer, DAWN \cite{vis:DAWN}, VRML \cite{vis:VRML},
+gMocren \cite{vis:gMoc} and ASCIITree.  Some of these drivers and new features
+are detailed below.
+
+\subsubsection{Advances in drivers and viewers}\label{sec:drv}
+\input{visualization/Drivers.tex}
+
+\subsubsection{New feautures in trajectory modeling and filtering}\label{sec:trajectory}
+\input{visualization/Trajectory.tex}
+
+\subsubsection{Additional new features}\label{sec:morefeatures}
+\input{visualization/MoreNewFeatures.tex}
+
+\subsubsection{Approach to MT}\label{sec:approachMT}
+\input{visualization/ApproachMT.tex}
+

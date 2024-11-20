@@ -1,0 +1,85 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% analysis.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:analysis}
+
+\subsection{\textbf{Analysis}}
+
+\subsubsection{Introduction}
+% History (AIDA based analysis)
+% g4tools and new Geant4 analysis category
+Analysis tools based on AIDA (Abstract Interfaces for Data Analysis) 
+\cite{analysis:AIDA} have been used in \Gfour{} examples since release 3.0 in
+December 2000, but until 2010 no analysis code was provided in the \Gfour{} 
+source.  Several AIDA-compliant tools are available, including JAS, iAIDA, 
+Open Scientist Lab and rAIDA \cite{bib:AppDevGuide} .
+%  \cite{analysis:ApplicationDeveloperGuide}.
+However some of them have not been maintained, some do not implement the AIDA
+interfaces completely and some are not always easy to install and use.
+
+A new analysis package based on g4tools~\cite{analysis:tools} was added in
+\Gfour{} release 9.5 with the aim of providing users with a ``light-weight'' 
+analysis tool available as part of the \Gfour{} installation without the need to 
+link to an external analysis package.  It consists of the analysis manager 
+classes and also includes the g4tools package.
+
+g4tools provides code to write histograms and ntuples in several formats: 
+ROOT~\cite{analysis:Root}, XML 2040 AIDA~\cite{analysis:AIDA} and CSV 
+(comma-separated values) for ntuples and HBOOK~\cite{analysis:HBOOK}. It
+is a part of the highly portable inlib and exlib~\cite{analysis:tools} 
+libraries, which also include other facilities like fitting and plotting.  These
+libraries are used to build the ioda application, available on all interactive
+platforms so far, including iOS and Android, and able to read the file formats 
+written with g4tools.   
+
+The analysis classes provide a uniform, user-friendly interface to g4tools and 
+hide from the user the differences between various output technologies.  They 
+take care of higher level management of the g4tools objects (files, histograms
+and ntuples), handle allocation and removal of the objects in memory and provide
+the methods to access them via indexes.  For simplicity of use, all user 
+interface analysis functions are provided within a single class which is seen by
+the user as \gclass{G4AnalysisManager}.  Internally, this type is defined using
+a \verb"typedef" and it can point to one of four type-specific output manager 
+classes: \gclass{G4}\emph{Type}\gclass{AnalysisManager} where \emph{Type} can be 
+\emph{Csv}, \emph{Root}, \emph{Xml} or \emph{Hbook}.
+
+\subsubsection{Histogramming}
+At present, one-dimensional and two-dimensional histograms are supported.  The 
+properties of histograms already created can be changed with the use of
+dedicated \texttt{Set()} functions including a limited set of parameters for 
+histogram plotting. 
+
+\gclass{G4AnalysisManager} also provides extensions to g4tools suitable for 
+\Gfour{} applications.  Users can choose units and functions which are then 
+automatically applied to filled values, a binning scheme (linear or logarithmic)
+and an ASCII option which activates the printing of histograms to an ASCII file.
+The activation option allows the user to activate only selected histograms.  
+When this option is selected, only the histograms marked as activated are 
+returned, filled or saved in a file. 
+
+Histograms may also be created and modified interactively or in a macro 
+using the rich set of commands defined in the \gclass{G4AnalysisMessenger} class.
+
+\subsubsection{Ntuples}
+Ntuples with \emph{int}, \emph{float} and \emph{double} column types are 
+supported.  Depending on the selected output format, more files can be 
+generated when more than one ntuple is defined in a user application.  This is
+the case for XML and CSV, which do not allow writing more than one ntuple to a
+file.  The ntuple file name is then generated automatically from the base file
+name and the ntuple name.
+
+\subsubsection{Multithreading}
+Like all other \Gfour{} components, the analysis code was adapted for 
+multithreading.  In multithreading mode, instances of the analysis manager 
+are internally created on the master and worker threads and data accounting is 
+processed in parallel on worker threads.  The migration to multithreading 
+requires no changes in the user's client analysis code.  HBOOK output is not 
+supported in multithreading mode.
+
+Histograms produced on worker threads are automatically merged on the call to 
+\verb"Write()" and the result is written to a master file.  Ntuples produced on
+worker threads are written to separate files, the names of which are generated 
+automatically from a base file name, a thread identifier and eventually also an
+ntuple name.  No merging of ntuples is performed in order to avoid an associated 
+time penalty. 
+

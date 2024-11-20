@@ -1,0 +1,64 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% uni.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In the early stages of \Gfour{}, low and high energy electromagnetic processes
+were developed independently, with the result that these processes could not
+be used in the same run.  To resolve this problem, the interfaces were unified
+so that the standard, muon, high energy, low energy and DNA EM physics 
+sub-packages \cite{bib:uni} now follow the same design.
+
+All \Gfour{} physical processes, including transportation, decay, EM, hadronic,
+optical and others, were implemented via the unique general interface
+\gclass{G4VProcess}.  Three EM process interfaces inherit from it via the 
+intermediate classes \gclass{G4VContinuousDiscreteProcess} or 
+\gclass{G4VDiscreteProcess} \cite{embib:design}:
+\begin{itemize}
+\item \gclass{G4VEnergyLossProcess}, which is active along the step and post
+              step,
+\item \gclass{G4VMultipleScattering}, which is active along the step and
+\item \gclass{G4VEmProcess}, which has no energy loss and is active post step
+              and at rest. 
+\end{itemize}
+These three base classes are responsible for interfacing to the \Gfour{} kernel, 
+initializing the electromagnetic physics, managing the energy loss, range and 
+cross sections tables, managing the electromagnetic models, and the built-in 
+biasing options.  Each process inherits from one of these base classes, and has
+one or more physics models.  EM physics models were implemented via the 
+\gclass{G4VEmModel} interface.  A model is applied for a defined energy range 
+and \gclass{G4Region}, allowing, for example, one model from the low energy and 
+one from the high energy sub-package to be assigned to a process for a given 
+particle type.
+
+Migration to this common design resulted in an improvement of overall CPU 
+performance, and made it possible to provide several helper classes which are 
+useful for a variety of user applications:
+\begin{itemize}
+\item \gclass{G4EmCalculator}: accesses or computes cross section, energy loss,
+              and range;
+\item \gclass{G4EmConfigurator}: adds extra physics models per particle type, 
+              energy, and geometry region; 
+\item \gclass{G4EmSaturation}: adds Birks saturation of visible energy in
+              sensitive detectors;
+\item \gclass{G4ElectronIonPair}: samples ionization clusters in tracking
+              devices.
+\end{itemize}
+
+These common interfaces enabled the full migration of EM classes to
+multithreading \cite{embib:chep14} with only minor modifications of the existing
+physics model codes.  Initialization of the energy loss, stopping power and 
+cross section tables is carried out only once in the master thread at the
+beginning of simulation and these tables are shared between threads at run time. 
+
+Further improvements were made through the factorization of secondary energy and
+angle sampling.  The \gclass{G4VEmAngularDistribution} common interface allows
+the reuse of angular generator code by models in all EM sub-packages.  The
+implementation of a unified interface for atomic deexcitation, 
+\gclass{G4VAtomDeexcitation} provides the possibility of sampling atomic 
+deexcitation by models from all EM sub-packages.
+ 
+The consolidation of the EM sub-packages boosts the development of new models,
+% and automatically resolves a number of problems seen in previous versions.
+% Moreover, it 
+provides new opportunities for the simulation of complex high energy and low 
+energy effects and enables better validation of EM physics \cite{embib:uni2}. 
+

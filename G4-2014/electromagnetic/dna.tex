@@ -1,0 +1,63 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% dna.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Gfour{} offers a set of physics processes and models \cite{embib:dna0} to 
+simulate track structure in liquid water, the main component of biological
+media.  These were developed as part of the \Gfour{}-DNA project 
+\cite{embib:dnaweb}, and extend  
+% in 2001 by the European 
+% Space Agency 
+\Gfour{} to include the simulation of biological damage by ionizing radiation
+\cite{embib:dna1,embib:dna2}. 
+
+The first set of discrete processes was delivered in 2007 \cite{embib:dnaProc1}.
+Their accuracy was further evaluated and improved 
+\cite{embib:dnaxs, embib:dnaProc2, embib:dnaProc3} through the inclusion, 
+for example, of more accurate modeling of electron elastic scattering
+\cite{embib:dnaElast}, and additional physical processes for sub-excitation
+electrons, such as vibrational excitation and molecular attachment 
+\cite{embib:dnaTS}.  These processes are critical for the modeling of
+physico-chemical processes in liquid water \cite{embib:chem:paper1}. 
+
+A major design upgrade of the software classes was applied in order to allow 
+their combination with other \Gfour{} EM processes and models, for a coherent 
+modeling of EM interactions \cite{bib:uni,embib:dnaPhysList}.  Thus, for 
+their simulation applications, users may instantiate a 
+\gclass{G4EmDNA\allowbreak{}Physics} object from their physics list.  This 
+physics constructor contains all required \Gfour{}-DNA physics processes and 
+models for
+\begin{itemize} 
+\item electrons, including ionization, excitation, elastic scattering, 
+      vibrational excitation and attachment,
+\item protons and neutral hydrogen, including excitation, ionization, electron
+      capture and stripping,
+\item alpha particles and their charged states, including excitation,
+      ionization, electron capture and stripping, and  
+\item ionization for Li, Be, B, C, N, O, Si and Fe ions.
+\end{itemize}
+ 
+Stopping powers and ranges simulated with \Gfour{}-DNA have been compared to
+international recommendations \cite{embib:dnaStop}.  These processes can be
+combined with \Gfour{} gamma processes.  Note that the \emph{Livermore} low
+energy electromagnetic gamma models are selected by default in the 
+\gclass{G4EmDNA\allowbreak{}Physics} constructor. 
+
+As an illustration, \\
+\verb"examples/extended/medical/dna/dnaphysics"\\
+explains how to use this physics constructor.  In addition,
+\verb"examples/extended/medical/dna/microdosimetry" describes how to 
+combine \Gfour{}-DNA and \Gfour{} standard electromagnetic processes in a simple
+user application.  A variety of applications based on \Gfour{}-DNA processes and
+models allow the study of elementary energy deposition patterns at the 
+sub-cellular scale.  For example, the comparison of dose point kernels 
+\cite{embib:dnaPK}, $S$-values  \cite{embib:dnaS}, radial doses 
+\cite{embib:dnaRad}, cluster patterns for ions with the same LET 
+\cite{embib:dnaLET}, the effect of a magnetic field on electron track structures
+\cite{embib:dnaMag}, and the modeling of direct DNA damage 
+\cite{embib:dnaDirD1,embib:dnaDirD2,embib:dnaDirD3,embib:dnaDirD4}
+have so far been explored utilizing these tools.  They even provide a framework
+for the future study of non-targeted biological effects \cite{embib:dnaBio}, 
+extending further the first applications of \Gfour{} electromagnetic physics at 
+the physics-biology frontier
+\cite{embib:dnaBio1,embib:dnaBio2,embib:dnaBio3,embib:dnaBio4,embib:dnaBio6,embib:dnaBio7,embib:dnaBio8}.
+

@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% gridtools.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Grid tools}
+The simplified calorimeter is a \Gfour{} application which uses simplified 
+versions of LHC calorimeters and produces simulation results for beam energies
+between 1 and 500 GeV.  These results are then compared to normalized real data
+so that the effects of changes between different \Gfour{} versions or physics
+models on physics performance may be investigated.
+
+Acquiring accurate simulation results requires running the simplified 
+calorimeter for thousands of events.  This, in conjunction with the high 
+energies, makes running the application on developer PCs or even local computing
+clusters impossible due to time restrictions.  This need for computing power was
+met by the use of resources provided by the Worldwide LHC Computing Grid 
+\cite{GT:LHCG}.  
+Simplified calorimeter jobs are split into smaller fragments and sent for 
+execution in various grid sites around the world.  Results are then collected 
+and pushed to the validation database.  The end user, typically a developer, is 
+able to run on-demand analysis tasks through an interactive web application and 
+produce plots.  The current grid tools implementation is based on the DIRAC 
+workload management system which is used to distribute the jobs.  A system was 
+developed to support different \Gfour{} tests, examples and applications that 
+are or will be executed on the grid.  \Gfour{} libraries and executables are 
+made available to the sites through the \Gfour{} CernVM-FS \cite{GT:CVMFS} 
+repository.  Finally ROOT is used for the results format, merging of split jobs
+and on-demand analysis.
+

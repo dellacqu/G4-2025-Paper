@@ -1,0 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% radioactivedecay.tex
+% Author: Dennis Wright
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{The radioactive decay process}
+The \gclass{G4RadioactiveDecay} process and model handles $\alpha$, $\beta^-$,
+$\beta^+$, isomeric transition (IT) and electron capture (EC) decays, and can be
+applied to generic ions both in flight and at rest.   
+
+Details for each decay or level transition, such as nuclear level energies, 
+branching ratios and reaction Q values, come from the \Gfour{} RadioactiveDecay 
+database, which currently contains entries for 2798 nuclides.  Details of 
+specific gamma levels used for IT decays are taken from the \Gfour{} 
+PhotonEvaporation database.  Both the PhotonEvaporation and RadioactiveDecay 
+databases take their data from the Evaluated Nuclear Structure Data File (ENSDF)
+\cite{hadbib:ENSDF} and have recently been rationalized so that their common 
+nuclear levels have identical values.
+
+Beginning with \Gfour{} release 9.6 and continuing through releases currently in
+preparation, a number of improvments have been made to the radioactive decay 
+package.  These include:
+
+\begin{itemize}
+\item a complete review of the PhotonEvaporation and RadioactiveDecay databases,
+      and updating to the 2013 version of ENSDF,
+\item the ability to model decays with lifetimes as short as 1 ps,
+\item decays of observationally stable ground states, that is, those having
+      very long predicted life times, but which have not yet been observed to 
+      decay,  
+\item the addition of unique first, second and third forbidden $\beta^-$ and
+      $\beta^+$ decays,
+\item the default invocation of the atomic relaxation model after IT and EC 
+      decays, and 
+\item improved energy conservation for all decay modes.
+\end{itemize}
+

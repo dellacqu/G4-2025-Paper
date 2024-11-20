@@ -1,0 +1,112 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% examples.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:basicexamples}
+\subsection{\textbf{Basic Examples}}
+The \Gfour{} toolkit includes several fully coded examples which demonstrate the 
+implementation of the user classes required to build a customized simulation.
+The previous ``novice'' set of examples, oriented to beginning users, was 
+refactored into ``basic'' and ``extended'' example sets in \Gfour{} 10.0.
+
+The new ``basic'' examples cover the most typical use-cases of a \Gfour{} 
+application while maintaining simplicity and ease of use.  They are provided as 
+starting points for new application developers.  There are currently five such
+examples, some of which include several options or sub-examples.  The features
+demonstrated in each example will be presented in the following subsections.
+
+All basic examples have been migrated to multithreading (MT) and no special 
+steps are required to build them in this mode.  They will automatically run as
+MT when they are built on the \Gfour{} libraries built with MT mode activated; 
+otherwise they will run in sequential mode.  MT mode may be chosen by creating 
+\gclass{G4MTRunManager} instead of \gclass{G4RunManager} in the \gclass{main()}
+of the example.
+
+% If the example is invoked in interactive mode, that is, without specifying a
+% macro file on the command line, an interactive session will be established
+% depending on the build options and \verb"~/.g4session".  For more details on
+% this see the Application Developers' Guide \cite{bib:AppDevGuide}.  The most 
+% advanced session possible will be instantiated.
+
+% All basic examples include a macro \verb"vis.mac" that is invoked in interactive
+% mode if the user builds with visualization.  It establishes a default viewer, 
+% the most advanced available with the chosen session, a viewing angle, etc., 
+% suitable for each example. In particular \verb"B1/vis.mac" demonstrates several
+% features of the visualization system, namely the viewing style, the type and 
+% appearance of trajectories, the ability to add axes, text, date and time, event
+% number, the \Gfour{} logo and the ability to set the visibility of individual 
+% volumes.  These are just a few of the features available with the \Gfour{} 
+% visualization system \cite{bib:visprogress}.  A comprehensive list, with 
+% guidance, can be found in Chapter 7 of the Application Developers Guide 
+% \cite{bib:AppDevGuide}.
+
+Basic examples can be run in interactive mode with visualization, or in 
+batch mode.  The most suitable visualization parameters, such as a viewing 
+angle, are selected for each example in order to promote a better understanding
+of the example scenario and to demonstrate the most useful features of the 
+visualization system.  A comprehensive list of visualization features can be 
+found in Chapter 7 of the Application Developer Guide \cite{bib:AppDevGuide}.
+
+\subsubsection{Example B1}
+\verb"examples/basic/B1" demonstrates a simple application in which user actions
+control the accounting of the energy deposit in volumes.  The dose in a selected 
+volume is then calculated.  The geometry setup is defined with the use of 
+simple placements (\gclass{G4PVPlacement}) and the physics is defined with the 
+use of the QBBC pre-packaged physics list.  Scoring is implemented directly 
+in the user action classes and an associated ``run'' object (\verb"B1Run")
+is created.
+
+This example also demostrates several features of the visualization system not
+shown in other examples, namely the type and appearance of trajectories, the 
+ability to add axes, text, date and time, event number, the \Gfour{} logo and
+the ability to set the visibility of individual volumes.
+  
+\subsubsection{Example B2}
+\verb"examples/basic/B2" simulates a simplified fixed target experiment. Two 
+geometry setup options are provided: one using simple placements 
+(\gclass{G4PVPlacement}) and one using parameterized volumes 
+(\gclass{G4PVParameterisation}).  In addition a global, uniform, transverse 
+magnetic field can be applied using 
+\gclass{G4Global\allowbreak{}MagField\allowbreak{}Messenger}.  The physics setup
+is defined using the FTFP\_BERT pre-packaged physics list with a step limiter.
+Scoring is implemented with sensitive detectors and hits.
+
+\subsubsection{Example B3} 
+\verb"examples/basic/B3" simulates a simplified positron emission tomography
+system.  The geometry is defined with simple placements and rotations.  A 
+modular physics list is used.  Primary particles are $^{18}$F ions randomly 
+distributed within a volume inside a simulated patient, with an associated 
+radioactive decay process.  Scoring is implemented with \Gfour{} primitive 
+scorers.
+
+\subsubsection{Example B4}
+\verb"examples/basic/B4" simulates a sampling calorimeter.  The geometry is 
+defined using simple placements and replicas (\gclass{G4PVReplica}).  A global,
+uniform, transverse magnetic field can be applied using 
+\gclass{G4Global\allowbreak{}MagField\allowbreak{}Messenger}.
+Physics is defined using the FTFP\_BERT reference physics list.
+
+Energy deposits and track lengths of the charged particles are recorded event
+by event in the absorber and gap layers of the calorimeter.  This example 
+demonstrates four different scoring methods: user actions, user-developed 
+objects, sensitive detectors and hits, and primitive scorers.
+
+Also demonstrated is the use of \Gfour{} analysis tools for accumulating
+statistics and computing the dispersion of the energy deposit and track lengths 
+of the charged particles.  The resulting one-dimensional histograms and an 
+ntuple are saved in an output file, which has ROOT format by default, but can
+be changed at compilation time to other formats supported by g4tools (AIDA XML,
+CSV for ntuples, or HBOOK). 
+
+\subsubsection{Example B5}
+\verb"examples/basic/B5" simulates a double-arm spectrometer with wire chambers,
+hodoscopes and calorimeters. The geometry setup, less trivial than in previous 
+examples, is defined using placements, rotations, replicas and a parameterization.
+In addition a global, uniform, transverse magnetic field can be applied using 
+\gclass{G4GlobalMagFieldMessenger}.  The physics setup is defined with the 
+FTFP\_BERT reference physics list with a step limiter.  Scoring within wire 
+chambers, hodoscopes and calorimeters is implemented with sensitive detectors 
+and hits. 
+
+\gclass{G4GenericMessenger} is used to define user interface commands specific 
+to the user application and \Gfour{} analysis tools are used to output scoring
+quantities in one-dimensional and two-dimensional histograms and an ntuple. 

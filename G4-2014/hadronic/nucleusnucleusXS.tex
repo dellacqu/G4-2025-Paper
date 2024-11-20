@@ -1,0 +1,70 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% nucleusnucleusXS.tex
+% Author: Vladimir Uzhinsky
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Nucleus-nucleus cross sections}
+The simulation of nucleus-nucleus interactions and the corresponding cross
+sections is required by accelerator experiments, cosmic ray studies and 
+medical applications, to name a few domains.
+
+Because nuclei are charged, total and elastic cross sections are
+infinite due to Coulomb interaction. In reality, they are restricted
+by the screening of the atomic electrons. This interaction leads to a
+small-angle scattering which can be ignored in a first approximation.
+Thus, inelastic cross sections are the most important ones.
+With increasing energy electromagnetic dissociation (EMD) becomes dominant,
+especially for the collisions of heavy nuclei.  At low and intermediate energies
+EMD does not play an essential role, while the nuclear break-up and 
+multi-particle productions dominate.
+
+%{\bf why this sentence is here if we don't use this\\
+%There are good methods of EMD calculations
+%\cite{hadbib:AAx1,hadbib:AAx2,hadbib:AAx3}, but we do not implement them
+%because in low energy domain EMD results mainly in one or two neutron
+%production.} 
+The strong interaction cross sections can be calculated in the Glauber 
+approximation \cite{hadbib:AntiA5,hadbib:AAx4} at high ($>$ 1 GeV) energies.
+The description of the cross sections at low and intermediate energies is the
+challenging component.
+
+%{\bf All the next section is very confusing, it seems a historical excursus that does not clarify really what is used in G4,
+%we should substantially revisit this\\
+%Very simple expression was proposed in paper \cite{hadbib:AAx5} many years
+%ago -- $\sigma_{AB}=\pi (R_A+R_B-c)^2$, where $R_A$ and $R_B$ are radii of
+%$A$ and $B$ nuclei ($R_A=r_0\ A^{1/3}$). As it was found latter,
+%$r_0\simeq$ 1.36 fm, and $c\sim$ 0 -- 1.5 fm which depend on a projectile
+%energy. In papers \cite{hadbib:AAx6}, the following expression was proposed
+%for $c$, $c=x(A^{-1/3}+B^{-1/3})$. It was additional improved in
+%the paper \cite{hadbib:AAx7}.
+
+%In order to extend the parameterization in the intermediate energy range,
+%authors of the paper \cite{hadbib:AAx8} considered the expression:
+%$\sigma_{AB}=\pi R_{int}^2\ (1-B/E_{CMS})$, where $R_{int}$ was subdivided
+%into two parts, one was energy independent according to the author's analysis
+%of experimental data, the second term had an energy dependence. $B$ is
+%the Coulomb barrier of projectile-target system, and $E_{CMS}$ is CMS-energy
+%of the system: $B=Z_A Z_B e^2/r_C(A^{1/3}+B^{1/3})$. At this, they obtained
+%more reasonable value for $r_0$, $r_0=1.1$ fm. The parameterization was also
+%applyed at low energies \cite{hadbib:AAx9} introdicing more parameters, and
+%fitting experimental data. Recently, the last parameterization was validated for
+%light nucleus projectiles \cite{hadbib:AAx10}. As it was shown there,
+%the approach works rather well.\\
+%Proposal:\\
+%}
+A first simple expression was proposed in \cite{hadbib:AAx5}:
+$\sigma_{1,2}=\pi (R_1+R_2-c)^2$, where $R_1$ and $R_2$ are the radii of
+the two interacting nuclei ($R=r_0\ A^{1/3}$), $r_0\simeq$ 1.36 fm, and 
+$c\sim$ 0 -- 1.5 fm, depending on a projectile energy (following  
+\cite{hadbib:AAx6} and the further refinements of \cite{hadbib:AAx7}
+ $c \propto (A_1^{-1/3}+A_2^{-1/3})$).
+
+In order to extend the parameterization to the intermediate energy range
+\cite{hadbib:AAx8} $\sigma_{AB} = \pi R_{int}^2\ (1-B/E_{CMS})$ can be used,
+where $R_{int}$ is composed of two terms, energy dependent and independent, 
+$B = Z_A Z_B e^2/r_C(A^{1/3}+B^{1/3})$ is the Coulomb barrier of the 
+projectile-target system, and $E_{CMS}$ is center-of-mass system energy.
+
+In \Gfour{} the ``Sihver'', ``Kox'' and ``Shen'' parameterizations 
+\cite{hadbib:AAx7,hadbib:AAx8,hadbib:AAx9} are used, with the Shen 
+parameterization recommended for all physics lists.
+

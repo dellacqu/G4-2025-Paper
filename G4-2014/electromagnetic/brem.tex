@@ -1,0 +1,60 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% brem.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+A variety of models to simulate the radiation loss of charged particles are
+available in the toolkit (Table~\ref{em:brem}).  Significant efforts were made
+\cite{embib:chep12} to improve the description of EM shower shapes in order to
+simulate accurate $H\to\gamma\gamma$ signals in the LHC detectors 
+\cite{embib:Higgs1,embib:Higgs2}.  High energy EM shower profiles are sensitive 
+to electron/positron bremsstrahlung spectra and angular distributions.
+All \Gfour{} models of bremsstrahlung in the intermediate energy range 1~keV to
+1~GeV are based on tables of differential cross sections published by Seltzer
+and Berger \cite{embib:SelzBer}.  Evaluated 2-D tables are stored in the EM 
+data set \gclass{G4LEDATA} and are loaded at initialization time.  The 
+Ter-Mikaelian suppression of low energy gamma emission due to finite formation 
+length (see \cite{embib:bremfl} and references therein) is taken into account 
+by all models. 
+
+\begin{table*}
+\caption{List of \Gfour{} models for simulation of radiation loss with 
+         recommended energy ranges. Array size refers to the internal table
+         storing number of primary energy points versus number of secondary 
+         energy points.}
+\label{em:brem}
+\begin{center}
+\begin{tabular}{llll}
+\hline
+Particle& Model& Energy range&Array size \\ \hline
+ e-/e+& \gclass{G4SeltzerBergerModel} \cite{embib:chep12}& 1 keV - 10 GeV & 57x32\\
+ e-/e+ & \gclass{G4PenelopeBremsstrahlungModel} & 1 keV - 10 GeV & 57x32\\
+e-  & \gclass{G4LivermoreBremsstrahlungModel} & 1 keV - 10 GeV & 31x14 \\
+ e-/e+ & \gclass{G4eBremsstrahlungRelModel} \cite{embib:chep12}&   1 GeV - 10 PeV &  \\
+$\mu^{\pm}$    & \gclass{G4MuBremsstrahlungModel} \cite{embib:emmu}& 1 GeV - 10 PeV & \\
+$\mu^{\pm}$    & \gclass{G4MuPairProductionModel} \cite{embib:emmu}& 1 GeV - 10 PeV & 17x1000\\
+$\pi^{\pm}, K^{\pm}, p$ &\gclass{G4hBremsstrahlungModel} \cite{embib:hb}&5 GeV - 10 PeV &\\
+$\pi^{\pm}, K^{\pm}, p$ &\gclass{G4hPairProductionModel} \cite{embib:hb}&5 GeV - 10 PeV &13x1000 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table*}
+For $e^{\pm}$ above 1~GeV, a relativistic model \cite{embib:chep12} was developed
+with an improved treatment of the LPM effect \cite{embib:migdal}.  This was 
+implemented on top of the classical Bethe-Heitler cross section with complete 
+screening.  Two types of saturation effects, LPM and formation length, have been 
+combined to limit the number of low energy photons produced.  These corrections
+have a distinct impact on EM shower shape and fluctuations of energy loss for
+high energy EM particles, of particular importance in LHC experiments.
+
+Because simulation of radiation losses of muons is also important for LHC 
+experiments, muon bremsstrahlung and pair production models were developed
+\cite{embib:emmu}.  The effect of catastrophic energy loss by high energy muon 
+bremsstrahlung is well reproduced by simulation and is essential for muon 
+identification.  The process of $e^+e^-$ pair production by muons dominates the
+average energy loss at high energy \cite{embib:emmu}; proper simulation of the 
+final state requires keeping a detailed 2-D internal table of differential cross
+sections (Table~\ref{em:brem}) with a structure chosen to achieve a compromise 
+between memory usage, initialization time, and accuracy \cite{embib:chep14}.  
+Analysis of CMS test beam data \cite{embib:cmstb} indicates that bremsstrahlung
+and pair production by pions and protons should be taken into account.  This was
+achieved on top of the muon processes by changing the spin term and the mass of 
+projectile particles \cite{embib:hb}. 

@@ -1,0 +1,20 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bias.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Four biasing and variance reduction options are available within the EM
+sub-libraries of \Gfour{} \cite{embib:uni2}: 
+\begin{itemize}
+\item cross section biasing, which may be used to study the effects of 
+      uncertainties of cross sections;
+\item forced interaction, implemented for the limited use-case of a thin target; 
+\item splitting, where the interaction of a primary of weight $W$ which would 
+      normally produce 1 secondary of weight $W$, instead produces $N$ secondaries,
+      each with weight $W/N$, with no modification of the energy of the primary;
+\item Russian roulette, where secondaries produced by the interaction of a
+      primary particle of weight $W$ are killed with probability $1 - P$, and
+      the survivors' weight is set to $W/P$; users may define $P$ and the upper 
+      energy limit for secondaries for which the method is applied.
+\end{itemize}
+
+These four options are selectable through macro commands or C++ interfaces, 
+and can be applied in user-defined \gclass{G4Region}s.

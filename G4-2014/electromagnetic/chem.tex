@@ -1,0 +1,77 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% chem.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Radiation chemistry is the science of the chemical effects of radiation on
+matter.  Simulation tools in this field are relevant to many applications, such
+as the production of polymers by the irradiation of monomers.  However, one of
+the most studied materials under irradiation is liquid water, because it is used
+as a coolant in nuclear power plants and its irradiation may create oxidative 
+species that are likely to initiate the corrosion process.  Water is also of 
+interest because it is the main component of biological materials.
+
+When biological targets are exposed to radiation, the chemical response can be 
+complex, depending on the composition of the medium as well as on the energy and
+type of radiation.  For example, water radiolysis (dissociation of water by 
+radiation) promotes the creation of oxidative species.  These species can either
+react with one another or with the biological materials, interfering with the 
+normal functioning of one or many cells.
+
+In the context of the \Gfour{}-DNA project, a prototype for simulating radiation 
+chemistry was developed \cite{embib:dna3, embib:chem:paper1} and delivered with
+\Gfour{} version 10.1.  It is now possible to simulate the physical stage, the 
+physico-chemical stage (lasting up to about 1 picosecond) and the chemical stage
+(from 1 picosecond up to 1 microsecond) of water radiolysis.
+%   The simulation proceeds in two stages, the first 
+% consisting of prompt physics processes (reaction times $ < 10^{-9} s$) which 
+% provide a set of wounded biological and water molecules in a volume of interest, 
+% and the second consisting of physico-chemical processes with reaction times up
+% to $10^{-6} s$. 
+
+The \Gfour{}-DNA physical processes may in some cases create
+water molecules which are electronically modified, that is, they may be ionized,
+excited or have extra electrons in the case of dissociative attachment.  The 
+electronic and atomic readjustment of the water molecules can eventually lead to
+their dissociation.  The dissociation of water molecules is taken into account 
+by random selection using user-defined branching ratios \cite{embib:chem:paper1}.
+The positioning of the dissociative products is defined by the 
+\gclass{G4DNAWater\allowbreak{}DissociationDisplacer} class from qualitative 
+considerations \cite{embib:chem:Kreipl2009}.  It is assumed that the 
+dissociation of water molecules is independent of the physical stage of the 
+simulation.  This is to say that only electronic modifications undergone by the
+water molecule are responsible for the dissociative pathways.  The branching 
+ratios and positioning of dissociative products may be adjusted by the user if 
+necessary.
+
+Dissociative products can recombine to form new chemical species. To take this 
+recombination into account, a stepping algorithm was developed specifically for 
+managing collisions between \Gfour{} tracks.  The purpose of this algorithm is 
+to synchronize the transport of tracks during simulation.  This means that all 
+tracks are transported over the same time, accounting for chemical reactions 
+that may happen during a given time step. A description of this synchronized 
+stepping, applied to radiation chemistry, is available 
+in \cite{embib:dna3,embib:chem:these}.
+
+This stepping mechanism could, in principle, be applied to applications other
+than radiation chemistry.  A process must first be made compatible with the 
+\gclass{G4VITProcess} interface, which contains track information.  To run a 
+radio-chemistry simulation, a table of reactions describing the supported 
+reactions and the corresponding reaction rates must be provided.
+
+To simplify the use of the chemistry module, the 
+\gclass{G4EmDNA\allowbreak{}Chemistry} constructor provides default settings,
+and three examples, 
+\verb"examples/extended/medical/dna/chem1", 
+\verb"examples/extended/medical/dna/chem2" and
+\verb"examples/extended/medical/dna/chem3", are included.  These examples 
+progressively demonstrate how to activate and use the chemistry module from a
+user application. The module may be used with or without irradiation.
+
+The chemistry module is compatible with the current event-level multithreaded 
+mode of \Gfour{}.  However, the use of the module in this mode with a large number
+of simulated objects or threads is not recommended because synchronized stepping
+requires intense memory usage.
+
+For now, the chemistry module allows prediction of the chemical kinetics induced 
+by ionizing radiation. A future goal of the \Gfour{}-DNA project is to account for
+DNA damage resulting from irradiation. 

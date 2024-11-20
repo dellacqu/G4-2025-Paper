@@ -1,0 +1,160 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% physicslists.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:physlists}
+\subsection{\textbf{Physics Lists}}
+In \Gfour{}, physics lists refer to classes which provide the means to collect
+and organize the particle types, physics models and cross sections required for
+a particular simulation application.  These classes allow physics processes to 
+be registered to the run manager which in turn attaches them to tracks so that 
+they may interact properly with the simulation geometry.
+
+When originally conceived, physics lists were intended to give the user maximum 
+flexibility and responsibility to choose and combine particles, models and cross
+sections.  Developers thus did not provide default physics or specific physics 
+combinations to users, except in certain custom situations.  It eventually 
+became clear from user requests that ready-made and validated physics modules 
+were desired which could be easily plugged into user physics lists.  This led to
+the development of several ``reference'' physics lists which were specialized to
+provide standard behavior in various application domains.  In medical or space 
+applications, for example, detailed atomic physics may be required, while for 
+high energy physics it is not.  In high energy applications TeV scale physics is
+important, but not for medim and low energies.   
+
+While the basic, maximally flexible physics list classes are still available
+and fully documented in the \Gfour{} Application Developers Guide
+\cite{bib:AppDevGuide}, the focus here is on prepared, modular physics lists 
+which are organized around builders and constructors.  
+
+\subsubsection{Constructors} \label{subsec:ctors}
+All prepared physics lists in \Gfour{} derive from the class
+\gclass{G4VModular\allowbreak{}PhysicsList} which in turn derives from the base
+class \gclass{G4VUserPhysicsList}.  \gclass{G4VModular\allowbreak{}PhysicsList}
+maintains a vector of physics modules, each of which is an implementation of the 
+\gclass{G4VPhysics\allowbreak{}Constructor} class.  A module, referred to here 
+as a physics constructor, enables the logical grouping of related physics 
+models, cross 
+sections and particles.  This allows the most accurate and CPU-appropriate 
+physics models to be applied to given energy ranges and particle types.  The 
+\gmethod{ConstructParticle()} and \gmethod{ConstructProcess()} methods of 
+\gclass{G4VPhysics\allowbreak{}Constructor} can be used to instantiate the 
+particle types needed for a given application, and to assign models and cross
+sections to 
+processes.  For example, all pions and kaons could be instantiated in a meson 
+physics constructor, which would also assign two hadronic models, a cascade 
+model at low energies and parton string model at high energies, to the 
+processes pertaining to pions and kaons.
+
+The chosen electromagnetic and hadronic constructors are stored in a vector, 
+which makes it easy to build a new physics list by adding, removing or replacing
+physics constructors.  A large collection of these constructors is included in 
+the \Gfour{} toolkit.  The electromagnetic constructors are listed in 
+Table~\ref{em:physl} and examples for using them \cite{bib:uni} are distributed
+with the release. 
+
+\begin{table*}
+\caption{List of default and optional \Gfour{} EM physics constructor classes.
+         One of several optional EM physics constructors may be chosen by 
+         appending its shorthand name, listed in the ``Extension'' column, to 
+         the name of a basic physics list, such as FTFP\_BERT\_ENV, for example.
+         WVI refers to the Wenzel multiple scattering model as implemented by 
+         V. Ivantchenko.}
+\label{em:physl}
+\begin{center}
+\begin{tabular}{llll}
+\hline
+Physics Constructor Name& Application& Extension & Comment \\ \hline
+\gclass{G4EmStandardPhysics} & HEP &  &default (ATLAS)\\
+\gclass{G4EmStandardPhysics\_option1} & & EMV & simplified (CMS)\\
+\gclass{G4EmStandardPhysics\_option2} & & EMX & simplified (LHCb)\\
+\hline
+\gclass{G4EmStandardPhysics\_option3} & space \& & EMY & detailed  \\
+                             &  medicine &     & standard models\\
+\gclass{G4EmLivermorePhysics} & & LIV & detailed  \\
+                     &       &          &  Livermore models\\
+\gclass{G4EmPenelopePhysics} &  & PEN & detailed \\ 
+                    &  &     & Penelope models\\
+\gclass{G4EmStandardPhysics\_option4} &  & EMZ & combining \\
+                             &  &     & best models\\
+\hline
+\gclass{G4EmLivermorePolarizedPhysics} &  &  & polarized models\\
+\gclass{G4EmLowEPPhysics} &  &  & new low energy models\\
+\gclass{G4EmStandardPhysicsWVI} &  &  & WVI multiple scattering\\
+\gclass{G4EmStandardPhysicsSS} &  &  & single scattering \\
+\hline
+\gclass{G4EmDNAPhysics} & DNA &  & default for DNA physics \\
+\gclass{G4EmDNAPhysics\_option1} & DNA &  & WVI multiple scattering \\
+\hline
+\gclass{G4OpticalPhysics} & all &  & production and transport \\
+                 &     &  & of optical photons \\
+\hline
+\end{tabular}
+\end{center}
+\end{table*}
+
+\subsubsection{Builders}
+It is convenient to implement the physics constructors with more granular physics
+components.  As an example, consider the physics constructor 
+\gclass{G4HadronPhysicsFTFP\_BERT}, which implements all inelastic hadronic 
+interactions by using the FTF parton string and Bertini cascade models.  It 
+implements the \gmethod{G4HadronPhysicsFTFP\_BERT::ConstructProcess()} method by
+instantiating and invoking several builder classes, such as 
+\gclass{G4FTFP\allowbreak{}Neutron\allowbreak{}Builder},
+\gclass{ G4BertiniPiKBuilder} and \gclass{G4HyperonFTFPBuilder}.  
+
+Each type of builder has its own class which assigns physics models and cross 
+sections to processes.  It is here where the overlap in energy ranges between 
+two models is decided.  For an energy $E$ in the overlap region $E_1 < E < E_2$,
+one of the two models is chosen randomly; the probability to choose the model 
+valid at higher energy is zero at $E_1$ and one at $E_2$, increasing linearly 
+with energy.  It is also here where models are built from sub-models.  More 
+complicated generators, like the FTF parton string model or nuclear 
+de-excitation, are not implemented as a single model, but as a collection of 
+them.  This level of detail is not usually of interest to users, hence its 
+encapsulation within the builder classes.
+
+\subsubsection{Reference Physics Lists}
+As of release 10.0 the toolkit provided nine reference physics lists whose names
+reflect the combination of models used to describe the hadronic interactions 
+necessary for various applications.  Unless otherwise indicated, the 
+electromagnetic interactions in these physics lists are described by the 
+\Gfour{} standard EM models.  Reference physics lists are extensively and 
+routinely validated.    
+
+Perhaps the most-used reference physics list for high energy and space 
+applications is FTFP\_BERT.  It uses the \Gfour{} Bertini cascade for 
+hadron-nucleus interactions from 0 to 5 GeV incident hadron energy, and the FTF
+parton string model for hadron-nucleus interactions from 4 GeV upwards.  The 
+letter $P$ indicates that the \Gfour{} precompound mode is used to de-excite 
+the nucleus after the high energy FTF interaction has been completed.  The 
+FTFP-Bertini combination forms the backbone of many physics lists. 
+
+QGSP\_BERT is a popular alternative which replaces the FTF model with the 
+QGS model over the high energy range.  Using the other intranuclear cascade 
+models, \gclass{G4BinaryCascade} or \gclass{G4INCLXX} instead of Bertini, 
+produces the FTFP\_BIC, QGSP\_INCLXX and QGSP\_BIC physics lists, of which the
+latter is often used in medical applications.  When high precision neutron 
+propagation is included in a physics list, the letters $HP$ are appended to its 
+name, for example FTFP\_BERT\_HP.  Many other physics lists can be built in 
+this way, but only a handful of them are sufficiently tested and validated to
+qualify as reference lists.
+
+There are also specialized physics lists such as QBBC \cite{bib:QBBC} and 
+Shielding, which are not currently considered to be reference lists, but are 
+often used.
+
+As mentioned in sections \ref{sec:emphys} and \ref{subsec:ctors}, there are 
+several collections of electromagnetic models besides the standard.  Using these
+in a physics list is made easy by the \gclass{G4PhysicsListFactory}.  A user 
+need only specify the desired electromagnetic option, and the factory will 
+substitute it for the standard collection in the newly created physics list.  
+Examples of physics lists that may be created using G4PhysicsListFactory are:
+\begin{itemize}
+\item QGSP\_BERT\_EMV, the QGSP\_BERT set of hadronic models with faster but
+      less precise electromagnetic models,
+\item FTFP\_BERT\_LIV, the FTFP\_BERT set of hadronic models with the Livermore
+      electromagnetic models, or
+\item QGSP\_BIC\_DNA, the QGSP\_BIC set of hadronic models with the low energy
+      DNA electromagnetic models.
+\end{itemize}
+

@@ -1,0 +1,36 @@
+
+Many options are now provided for how trajectories should be modeled (how colors
+or line styles are selected).  These improvements have eliminated the most 
+common reason users had to code their own trajectory classes.  In addition to 
+the default model, where trajectories were colored by charge, one can now set 
+color or other line properties based on particle ID, particle origin volume, or
+any other particle attribute that has been loaded into a \texttt{G4AttValue}.
+One can also add entirely new, customized trajectory models.  New options make
+it easy to control whether trajectories are shown as basic lines, lines plus
+step points or step points alone, and one may also modify step point colors.
+
+Additional new features allow trajectories to be filtered, causing only a 
+specific subset to be drawn.  These filtering options match the design of the 
+trajectory modeling options, so that filtering based on charge, particle ID, 
+particle origin volume, or some custom aspect, is possible.  Filters may be
+daisy-chained so that one may show, for example, only the neutrons originating
+from a particular collimator.
+
+Completing the set of additions to trajectory drawing is the ability to select
+smooth and rich trajectories.  By default, trajectories are represented as a set
+of line segments connecting particle steps.  Because \Gfour{}'s efficient 
+stepping algorithm may require very few steps in some magnetic fields, the 
+default trajectory drawn through a solenoidal field may appear very jagged.  The
+optional Smooth Trajectory Drawing causes additional points to be generated
+along the particle trajectory so that the visualization is smoother.  Rich 
+trajectories concern the amount of additional information with which 
+trajectories and step points are annotated.  By default, trajectories have only 
+basic information attached and step points have only position information; thus 
+when one picks on these objects in the various pick-enabled viewing systems 
+(HepRApp, Qt, OI or OpenGL with X11), one discovers only a few pieces of 
+information about the trajectory and no details about the trajectory points.  
+The Rich trajectory option enriches this annotation, providing picked 
+trajectories containing many more pieces of information, such as the entire 
+history of geometry volumes traversed.  It also adds a wealth of information to
+step points, such as the type of process that created the step.
+

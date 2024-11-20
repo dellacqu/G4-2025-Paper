@@ -1,0 +1,24 @@
+
+The final set of changes concern \Gfour{}'s migration to multithreaded (MT) 
+operation.  The overall design of visualization remains little-changed for 
+those users running in sequential mode, but significant changes were required 
+to enable visualization from MT mode.
+
+Currently in MT mode, events are only drawn at end of run, that is, once all
+threads have completed their work.  This limitation is scheduled to be removed
+in release 10.2 by moving part of visualization to its own thread, such that 
+each event is available for drawing as soon as that event is complete.
+
+In MT mode, visualization will properly handle any commands that request drawing
+of high level graphical objects (geometry volumes, trajectories and decorations
+such as axes).  However, user-supplied code that directly asks the visualization 
+system to draw low level graphical primitives (polygons or polylines) is not 
+supported.  This limitation will not likely affect many \Gfour{} users, as 
+recent improvements to geometry, trajectory and decoration handling have made 
+such user-supplied code largely unnecessary.  Because significant work will be 
+required to remove this limitation, support will come only if there is strong 
+demand for these features in MT mode.
+
+The RayTracer driver has itself been been multithreaded to take maximum 
+advantage of MT.
+

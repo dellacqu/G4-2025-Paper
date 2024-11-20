@@ -1,0 +1,71 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% emphyiscs.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\textbf{Electromagnetic physics}}\label{sec:emphys}
+The \Gfour{} set of electromagnetic (EM) physics processes and models 
+\cite{bib:G4,bib:uni,embib:design} are used in practically all types of
+simulation applications including high energy and nuclear physics experiments,
+beam transport, medical physics, cosmic ray interactions and radiation effects
+in space.  In addition to models for low and high energy EM physics for 
+simulation of radiation effects in media, a sub-library of very low energy 
+models was developed within the framework of the \Gfour{}-DNA project, with the
+goal of simulating radiation effects involving physics and chemistry at the 
+sub-cellular level \cite{embib:dna3}.
+
+\subsubsection{Unification of EM physics sub-packages}\label{sec:em1} % JMCB Feedback
+% Author: Omrane Kadri
+\input{electromagnetic/uni.tex}\label{sec:emuni}
+
+\subsubsection{Gamma models}\label{sec:em2} %JMCB Feedback
+% Author: Jeremy Brown
+\input{electromagnetic/gamma.tex}
+
+\subsubsection{Ionization models}\label{sec:em3} % JMCB Feedback
+% Author: Melanie Raine
+\input{electromagnetic/ioni.tex}
+
+\subsubsection{Multiple and single scattering}\label{sec:em4} % JMCB Feedback
+% Author: Omrane Kadri
+\input{electromagnetic/msc.tex}
+
+\subsubsection{Radiation of charged particles}\label{sec:em5}% JMCB Feedback
+% Author: 
+\input{electromagnetic/brem.tex}
+
+\subsubsection{Polarization models}\label{sec:em6} % JMCB Feedback
+% Author: Paul Gueye
+\input{electromagnetic/polar.tex}
+
+\subsubsection{High energy models}\label{sec:em61} % JMCB Feedback 
+% Author: 
+\input{electromagnetic/high.tex}
+
+\subsubsection{Atomic de-excitation}\label{sec:em7} % JMCB Feedback 
+% Author: 
+\input{electromagnetic/deex.tex}
+
+\subsubsection{Optical physics}\label{sec:em8} % JMCB Feedback 
+% Author: Peter Gumplinger
+\input{electromagnetic/xray_opt.tex}
+
+\subsubsection{\Gfour{}-DNA physics models}\label{sec:em9} % JMCB Feedback 
+% Author: Sebastien Incerti
+\input{electromagnetic/dna.tex}
+
+\subsubsection{\Gfour{}-DNA physico-chemistry module}\label{sec:em10} % JMCB Feedback 
+% Author: Mathieu Karamitros
+\input{electromagnetic/chem.tex}
+
+% % \subsubsection{Physics Lists}\label{sec:em11} % JMCB Feedback 
+% % Author: 
+% % \input{electromagnetic/phys.tex}
+
+\subsubsection{Built-in EM biasing options}\label{sec:em12} % JMCB Feedback
+% Author: Daren Sawkey
+\input{electromagnetic/bias.tex}
+
+\subsubsection{Validation and verification of EM models}\label{sec:em13}
+% Author: Vladimir Ivanchenko
+\input{electromagnetic/val.tex}
+
+%end

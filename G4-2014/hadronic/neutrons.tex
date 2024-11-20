@@ -1,0 +1,62 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% neutrons.tex
+% Authors: Tatsumi Koi, Vladimir Ivantchenko
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Low energy neutron models}
+As of \Gfour{} 10.0, there were three models treating low energy neutrons with
+high precision: NeutronHP, LEND and NeutronXS.  The NeutronHP models, for
+elastic, inelastic, capture and fission reactions, have been part of \Gfour{}
+for many years \cite{bib:G4}.  They depend on the \Gfour{} Neutron Data Library 
+(G4NDL) for cross sections, branching ratios, final state multiplicities and
+final state energy and angular distribution parameters.  In its original 
+formulation, G4NDL data were drawn from nine different databases,
+ENDF/B-VI \cite{hadbib:ENDF}, Brond-2.1 \cite{hadbib:BROND}, CENDL2.2
+\cite{hadbib:CENDL}, EFF-3 \cite{hadbib:EFF}, FENDL/E2.0 \cite{hadbib:FENDL},
+JEF2.2 \cite{hadbib:JEF}, JENDL-FF \cite{hadbib:JENDLFF}, JENDL-3 
+\cite{hadbib:JENDL3} and MENDL-2 \cite{hadbib:MENDL}, 
+with the majority coming from the Fusion Evaluated Nuclear Data Library (FENDL).  
+This changed in \Gfour{} version 9.5 when G4NDL became solely dependent on US 
+ENDF/B-VI and VII (Evalulated Nuclear Data Files) \cite{hadbib:ENDF}. Although 
+the other databases are no longer used by G4NDL, they are still available for 
+use with \Gfour{}.
+  
+Many evaluated data libraries, such as ENDF/B-VII.0, JEFF-3.1 and JENDL-4.0, 
+have been converted to the \Gfour{} format \cite{hadbib:mendoza} and can be 
+obtained at the IAEA Nuclear Data Services website \cite{hadbib:IAEA} .  
+% https://www-nds.iaea.org/geant4/.  
+
+NeutronHP was recently extended to include a new, detailed fission fragment 
+generator (FFG) which was designed to model the complete detectable portion of
+a fission event.  The event is modeled by taking into account mass and momentum 
+conservation.  Fission products, from gammas to nuclear fragments are produced 
+with realistic energies.  Ternary fission is
+supported, even though its probability is low, but is currently limited to 
+alpha particles.  The FFG is data-based, but designed to accommodate direct
+physics models.  An example of this is symmetric fission and its angular 
+dependencies.  This also allows the FFG to fission any isotope, provided that
+the daughter product yield data are available. 
+
+Because NeutronHP provides detailed cross sections in the resonance region and 
+on-the-fly Doppler broadening, the code can be quite slow and for this reason 
+is often not used in physics lists.  In order to provide improved CPU 
+performance while retaining part of the NeutronHP precision, the NeutronXS 
+elastic and capture cross sections were developed.  These cover neutron energies
+from sub-eV up to the TeV range.  Below 20 MeV the detailed cross section data 
+of the NeutronHP models are binned logarithmically and tabulated.  This preserves
+most of the resonance structure.  At all energies the final state for elastic 
+scattering and capture is generated using algorithms from the 
+\gclass{G4ChipsElasticModel} and \gclass{G4NeutronRadCapture} models.  The 
+NeutronXS cross sections yield a roughly four-fold decrease in CPU time for 
+neutron propagation compared to the NeutronHP models and, as of release 10.0,
+are now standard in most physics lists.
+
+Another alternative to NeutronHP is the set of LEND (Livermore) neutron models.
+These were designed to be faster than NeutronHP, with more streamlined code, but
+to provide the same physics.  In the LEND models the cross sections are evaluated 
+at a fixed temperature, rather than the on-demand temperature calculations of 
+NeutronHP.  This results in a factor five increase in speed.  These models use
+the Livermore online database for their reaction data.  It is based in part on 
+ENDF/B-VII and can be obtained from the Lawrence Livermore National Laboratory
+ftp site \cite{hadbib:llnlftp} .
+%  ftp://gdo-nuclear.ucllnl.org/pub .\\
+

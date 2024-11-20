@@ -1,0 +1,20 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% polar.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Models for the simulation of linear polarized gamma transport are based 
+on the set of Livermore gamma models: photoelectric effect \cite{embib:gamma9}, 
+Rayleigh and Compton scattering \cite{embib:gamma10}, and gamma conversion. 
+These models have been part of \Gfour{} for a long time.  New gamma conversion
+models briefly described in Section \ref{sec:em2} also take into account linear
+polarization of a primary gamma.  Also the process of positron annihilation was
+updated, and now takes into account the correlation of photon polarization in 
+the annihilation rest frame.
+
+In parallel, a polarization sub-library was designed to use the standard 
+gamma models \cite{embib:pol5}.  This library allows for the simulation of 
+circularly polarized electrons and positrons in vacuum and in polarized media.
+For a complete simulation of a low energy polarimeter setup, all processes
+relevant to tracking polarized particles through matter, such as spin-dependent
+Compton scattering, Bhabha-M\"{o}ller scattering, annihilation, bremsstrahlung
+and pair production, were implemented.  The main application of this library is
+in the design of positron sources for future linear colliders \cite{embib:pol6}.

@@ -1,0 +1,74 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% errorprop.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:errorprop}
+
+\subsection{\textbf{Error Propagation}}
+
+The track error propagation package serves to propagate one particle together 
+with its error from a given trajectory state (i.e. position and momentum with
+errors) until a user-defined target is reached (a surface, volume or given
+track length).  Its main use is for the track fitting of simulated or real data
+to reconstruct the trajectory of a particle that has left several detector
+signals along its path. 
+
+To do its work, this package uses \Gfour{} geometry and physics, so that the 
+same geometry and magnetic field used in the simulation can be used for the 
+track error propagation.  The \Gfour{} physics equations can also be used, but
+it is the average trajectory that should be propagated and this must be taken 
+into account.  Although the user may use his/her own physics list, a physics 
+list provided in the package is recommended.  It has no straggling due to 
+multiple scattering, no fluctuations in the energy loss, no emission of 
+secondary particles and no hadronic processes.  This physics list also 
+accommodates backward propagation as well as forward (the direction the track 
+followed to produce the detector signals).
+
+When a track is propagated forward, it loses energy and the energy at the 
+beginning of the step is used to calculate the energy loss.  When a track is
+propagated backward, it gains energy and the energy at the end of the step is
+used.  Thus, depending on propagation direction, quite different values of the
+energy loss might be obtained.  To avoid this, the algorithm uses in both cases
+the average energy to compute the energy loss.
+
+Propagation is terminated when one of the following targets are met:
+\begin{itemize}
+\item \emph{Surface}: a user-defined surface is reached.  The surface does not
+      have to be part of the geometry, as the propagation takes into account 
+      both the geometry and the user-defined surfaces at the same time.  
+      Currently plane and cylindrical surfaces may be defined, as well as
+      surfaces formed from the combination of the two;
+\item \emph{Volume}: the surface of one of the logical volumes of the geometry
+      is reached.  The user may choose if the track is to stop only when 
+      entering the volume, exiting the volume, or in both cases.
+\item \emph{Track length}: a given track length is reached.
+\end{itemize}
+
+This package was implemented following GEANE~\cite{errprop:geane} from GEANT3,
+which was based on the equations developed by the EMC 
+collaboration~\cite{errprop:emc}. 
+
+Users may implement the example provided with the \Gfour{} distribution, at 
+\verb"examples/extended/errorpropagation".  The geometry in this example 
+simulates a simplified typical high energy physics detector consisting of
+\begin{itemize}
+\item  an air-filled beamline,
+\item  an air-filled central detector, 
+\item  a copper calorimeter, divided into four sections,
+\item  an aluminium calorimeter, divided into ten sections, and
+\item  an air-filled muon detector.
+\end{itemize}
+While the example does not pretend to have a fully realistic geometry, it is 
+sufficient to test the code.  Also the volumes were chosen to match those of
+the example in the GEANE paper so that a detailed comparsion of results could
+be done.
+  
+The detector is immersed in a magnetic field with a default value of 1 kilogauss
+pointing along the negative $z$ axis.  This value can be changed by user command.
+An initially free trajectory state is created to simulate a muon track of 20 GeV
+along the $x$ axis.  This track is propagated until one of the termination 
+targets mentioned above is reached.  An enviroment variable serves to select the
+type of target.  Another enviroment variable allows either forward or backward 
+propagation to be selected.  The user also has the freedom to choose whether
+control will be returned to the user after each step, or only after the 
+propagation target has been reached.
+
